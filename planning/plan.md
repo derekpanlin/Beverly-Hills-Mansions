@@ -9,9 +9,9 @@ Table Spots {
   lng decimal(10, 7)
   name varchar
   description varchar
-  price int
-  created_at datetime [default: `CURRENT_TIMESTAMP`]
-  updated_at datetime [default: `CURRENT_TIMESTAMP`]
+  price decimal
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`]
 }
 
 Table Users {
@@ -20,9 +20,9 @@ Table Users {
   last_name varchar
   email varchar
   username varchar
-  password varchar
-  created_at datetime [default: `CURRENT_TIMESTAMP`]
-  updated_at datetime [default: `CURRENT_TIMESTAMP`]
+  hashed_password varchar
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`]
 }
 
 table Reviews {
@@ -31,8 +31,8 @@ table Reviews {
   spot_id int [ref: > Spots.id]
   review varchar
   stars int
-  created_at datetime [default: `CURRENT_TIMESTAMP`]
-  updated_at datetime [default: `CURRENT_TIMESTAMP`]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`]
 }
 
 table Bookings {
@@ -41,13 +41,25 @@ table Bookings {
   spot_id int [ref: > Spots.id]
   start_date date
   end_date date
-  created_at datetime [default: `CURRENT_TIMESTAMP`]
-  updated_at datetime [default: `CURRENT_TIMESTAMP`]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`]
 }
 
-table Images {
+table SpotImages {
   id int [pk]
   url varchar
+  preview boolean
   spot_id int [ref: > Spots.id]
-  review_id int [ref: > Reviews.id]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`]
 }
+
+table ReviewImages {
+  id int [pk]
+  url varchar
+  review_id int [ref: > Reviews.id]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`]
+}
+
+![alt text](<../images/Airbnb Project  (2).jpg>)
