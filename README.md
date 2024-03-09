@@ -1,8 +1,8 @@
-# `<name of application here>`
+# `BEVERLY HILLS MANSIONS`
 
 ## Database Schema Design
 
-![DB Schema](<../images/Airbnb Project  (2).jpg>)
+![DB SCHEMA](<images/Airbnb Project  (2).jpg>)
 
 ## API Documentation
 
