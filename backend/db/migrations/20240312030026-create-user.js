@@ -15,11 +15,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      first_name: {
+      firstName: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      last_name: {
+      lastName: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -33,7 +33,7 @@ module.exports = {
         allowNull: false,
         unique: true
       },
-      hashed_password: {
+      hashedPassword: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -51,6 +51,5 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Users');
-    return queryInterface.dropTable(options);
   }
 };
