@@ -4,6 +4,8 @@
 
 ![DB SCHEMA](<images/Airbnb Project  (2).jpg>)
 
+
+***USE CAMELCASE INSTEAD OF snake_case***
 ## API Documentation
 
 ## USER AUTHENTICATION/AUTHORIZATION
