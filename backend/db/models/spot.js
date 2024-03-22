@@ -10,20 +10,50 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Spot.belongsTo(models.User,)
     }
   }
   Spot.init({
-    ownerId: DataTypes.INTEGER,
-    address: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING,
-    country: DataTypes.STRING,
-    lat: DataTypes.FLOAT,
-    lng: DataTypes.FLOAT,
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    price: DataTypes.FLOAT
+    ownerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    address: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    city: {
+      type: DataTypes.STRING(20),
+      allowNull: false
+    },
+    state: {
+      type: DataTypes.STRING(2),
+      allowNull: false
+    },
+    country: {
+      type: DataTypes.STRING(15),
+      allowNull: false
+    },
+    lat: {
+      type: DataTypes.DECIMAL(10, 7),
+      allowNull: false
+    },
+    lng: {
+      type: DataTypes.DECIMAL(10, 7),
+      allowNull: false
+    },
+    name: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.STRING(750),
+      allowNull: false
+    },
+    price: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Spot',
