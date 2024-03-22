@@ -3,3 +3,4 @@ node_modules
 build
 .DS_Store
 *.db
+postman_test_specs/
