@@ -37,11 +37,10 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password3')
       }
 
-    ], { validate: true })
+    ], options)
   },
 
   async down(queryInterface, Sequelize) {
-    options.tableName = 'Users';
     return queryInterface.bulkDelete(options, null, {});
   }
 };
