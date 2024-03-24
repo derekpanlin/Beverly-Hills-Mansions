@@ -6,6 +6,7 @@ let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
+
 options.validate = true;
 options.tableName = 'Spots';
 
@@ -14,7 +15,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await Spot.bulkCreate([
       {
-        ownerId: 10,
+        ownerId: 1,
         address: '4 Bull Run',
         city: 'Irvine',
         state: 'CA',
@@ -26,7 +27,7 @@ module.exports = {
         price: 100.00
       },
       {
-        ownerId: 11,
+        ownerId: 2,
         address: '17206 Ansel',
         city: 'Irvine',
         state: 'CA',
