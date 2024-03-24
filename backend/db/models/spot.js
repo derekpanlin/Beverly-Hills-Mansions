@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       Spot.belongsTo(models.User, {
         foreignKey: 'ownerId',
         as: 'owner' // adding alias as owner
+      });
+
+      Spot.hasMany(models.Booking, {
+        foreignKey: 'spotId',
+        as: 'bookings' // adding alias
       })
     }
   }
