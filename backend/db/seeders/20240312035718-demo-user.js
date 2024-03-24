@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 options.validate = true;
-options.validate = 'Users';
+options.tableName = 'Users';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -42,7 +42,6 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     options.tableName = 'Users';
-    const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, null, {});
   }
 };

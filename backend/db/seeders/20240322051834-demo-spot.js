@@ -14,7 +14,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await Spot.bulkCreate([
       {
-        ownerId: 1,
+        ownerId: 10,
         address: '4 Bull Run',
         city: 'Irvine',
         state: 'CA',
@@ -24,9 +24,20 @@ module.exports = {
         name: 'Childhood Home',
         description: 'My childhood home growing up.',
         price: 100.00
+      },
+      {
+        ownerId: 11,
+        address: '17206 Ansel',
+        city: 'Irvine',
+        state: 'CA',
+        country: 'USA',
+        lat: 100.96235,
+        lng: 305.26534,
+        name: 'Our Home',
+        description: 'Our overly expensive apartment that we love.',
+        price: 2000.00
       }
-    ]
-    )
+    ], options)
     /**
      * Add seed commands here.
      *
@@ -39,7 +50,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Spots', null, options)
+    await queryInterface.bulkDelete(options, null, {})
     /**
      * Add commands to revert seed here.
      *
