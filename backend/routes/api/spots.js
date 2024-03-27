@@ -4,6 +4,7 @@ const router = express.Router();
 const { Spot, User, Booking, Review, ReviewImage } = require('../../db/models');
 
 // GET All spots
+// GET /api/spots
 
 router.get('/', async (req, res, next) => {
     try {
@@ -30,6 +31,14 @@ router.get('/', async (req, res, next) => {
         next(err)
     }
 })
+
+// Get all Spots owned/created by the current user
+// GET /api/spots/current
+
+router.get('/current', async (req, res, next) => {
+
+})
+
 
 
 module.exports = router;
