@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { Spot, User, Booking, Review, ReviewImage } = require('../../db/models');
-
+const { requireAuth } = require('../../utils/auth')
 // GET All spots
 // GET /api/spots
 
@@ -24,19 +24,30 @@ router.get('/', async (req, res, next) => {
                 'createdAt',
                 'updatedAt']
             // [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating']] <-- aggregate to calculate avgRating
+            // must add previewImage too
         });
 
         res.status(200).json({ Spots: spots })
     } catch (err) {
-        next(err)
+        next(err);
     }
 })
 
 // Get all Spots owned/created by the current user
 // GET /api/spots/current
 
-router.get('/current', async (req, res, next) => {
+router.get('/current', requireAuth, async (req, res, next) => {
+    try {
+        const spots = await Spot.findAll({
+            where: {
+                ownerId: req.user.id
+            }
+        });
 
+        res.status(200).json({ Spots: spots })
+    } catch (err) {
+        next(err);
+    }
 })
 
 
