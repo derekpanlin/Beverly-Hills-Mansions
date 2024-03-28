@@ -1,5 +1,6 @@
 'use strict';
 
+const { query } = require('express');
 const { Review } = require('../models');
 
 let options = {};
@@ -13,25 +14,32 @@ options.tableName = 'Reviews';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+
+    await Review.bulkCreate([
+      {
+        userId: 1,
+        spotId: 5,
+        review: 'Amazing place!',
+        stars: 5
+      },
+      {
+        userId: 2,
+        spotId: 1,
+        review: 'Could be better...',
+        stars: 2
+      },
+      {
+        userId: 3,
+        spotId: 2,
+        review: 'I stayed here.',
+        stars: 3
+      }
+    ])
   },
 
   async down(queryInterface, Sequelize) {
 
     await queryInterface.bulkDelete(options, null, {})
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+
   }
 };
