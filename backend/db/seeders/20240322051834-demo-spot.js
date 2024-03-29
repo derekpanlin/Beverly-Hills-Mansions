@@ -64,7 +64,19 @@ module.exports = {
       },
       {
         ownerId: 3,
-        address: '17206 Ansel',
+        address: '17206 Louis Ave',
+        city: 'Irvine',
+        state: 'CA',
+        country: 'USA',
+        lat: 10.96235,
+        lng: 30.26534,
+        name: 'Louis Home',
+        description: 'Louis the doodles home',
+        price: 5000.00
+      },
+      {
+        ownerId: 3,
+        address: '1000 Louis Blvd',
         city: 'Irvine',
         state: 'CA',
         country: 'USA',
