@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const { Sequelize } = require('sequelize');
 
 const { Spot, SpotImage, User, Booking, Review, ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth')
+
 // GET All spots
 // GET /api/spots
 
@@ -22,17 +24,23 @@ router.get('/', async (req, res, next) => {
                 'description',
                 'price',
                 'createdAt',
-                'updatedAt']
-            // [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating']] <-- aggregate to calculate avgRating
-            // must add previewImage too
+                'updatedAt',
+            ]
         });
 
-        res.status(200).json({ Spots: spots })
+        res.status(200).json({ Spots: spots, })
     } catch (err) {
         next(err);
     }
 })
 
+// HELPER FUNCTION TO CALCULATE AVG STAR RATING 
+function avgStarRating() {
+    const numReviews = spot.Reviews.length;
+    const avgStar = numReviews > 0 ? spot.Reviews.reduce((acc, cur) => acc + cur.stars, 0) / numReviews : 0;
+
+    return avgStar
+}
 // Get all Spots owned/created by the current user
 // GET /api/spots/current
 
@@ -67,7 +75,6 @@ router.get('/:spotId', async (req, res, next) => {
                 },
                 {
                     model: User,
-                    as: 'Owner',
                     attributes: ['id', 'firstName', 'lastName']
                 },
                 {
@@ -104,13 +111,15 @@ router.get('/:spotId', async (req, res, next) => {
             numReviews: numReviews,
             avgStarRating: avgStarRating,
             SpotImages: spot.SpotImages,
-            Owner: spot.Owner
+            Owner: spot.User
         });
 
     } catch (err) {
         next(err);
     }
-})
+});
+
+
 
 
 

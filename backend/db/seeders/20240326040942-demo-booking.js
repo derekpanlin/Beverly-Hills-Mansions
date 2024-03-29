@@ -21,8 +21,20 @@ module.exports = {
         endDate: new Date()
       },
       {
+        userId: 1,
+        spotId: 3,
+        startDate: new Date(),
+        endDate: new Date()
+      },
+      {
         userId: 2,
         spotId: 1,
+        startDate: new Date(),
+        endDate: new Date()
+      },
+      {
+        userId: 2,
+        spotId: 5,
         startDate: new Date(),
         endDate: new Date()
       },
@@ -31,7 +43,13 @@ module.exports = {
         spotId: 2,
         startDate: new Date(),
         endDate: new Date()
-      }
+      },
+      {
+        userId: 3,
+        spotId: 4,
+        startDate: new Date(),
+        endDate: new Date()
+      },
     ], options)
   },
 

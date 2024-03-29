@@ -20,13 +20,11 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       Spot.hasMany(models.SpotImage, {
-        foreignKey: 'spotId',
-        as: 'spotImages'
+        foreignKey: 'spotId'
       });
 
-      Spot.hasMany(models.SpotImage, {
-        foreignKey: 'spotId',
-        as: 'previewImage'
+      Spot.hasMany(models.Review, {
+        foreignKey: 'spotId'
       });
     }
   }

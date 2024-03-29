@@ -10,8 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.hasMany(models.Spot, {
-        foreignKey: 'ownerId',
-        as: 'owner'
+        foreignKey: 'ownerId'
       });
 
       User.hasMany(models.Booking, {
