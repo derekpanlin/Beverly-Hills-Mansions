@@ -11,7 +11,21 @@ router.get('/', async (req, res, next) => {
     try {
         // Fetch all spots from db
         const spots = await Spot.findAll({
-            attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
+            attributes: [
+                'id',
+                'ownerId',
+                'address',
+                'city',
+                'state',
+                'country',
+                'lat',
+                'lng',
+                'name',
+                'description',
+                'price',
+                'createdAt',
+                'updatedAt'
+            ],
             include: [
                 {
                     model: Review,
