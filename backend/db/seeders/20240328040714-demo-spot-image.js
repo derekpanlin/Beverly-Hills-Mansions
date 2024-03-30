@@ -40,6 +40,16 @@ module.exports = {
         preview: true,
         spotId: 5
       },
+      {
+        url: 'image url 5',
+        preview: true,
+        spotId: 6
+      },
+      {
+        url: 'image url 5',
+        preview: true,
+        spotId: 7
+      },
     ])
   },
 
