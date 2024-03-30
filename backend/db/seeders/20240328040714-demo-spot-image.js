@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         url: 'image url 2',
-        preview: false,
+        preview: true,
         spotId: 2
       },
       {
@@ -32,7 +32,7 @@ module.exports = {
       },
       {
         url: 'image url 4',
-        preview: false,
+        preview: true,
         spotId: 4
       },
       {
@@ -44,12 +44,7 @@ module.exports = {
         url: 'image url 5',
         preview: true,
         spotId: 6
-      },
-      {
-        url: 'image url 5',
-        preview: true,
-        spotId: 7
-      },
+      }
     ])
   },
 

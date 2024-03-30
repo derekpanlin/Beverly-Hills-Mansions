@@ -82,8 +82,8 @@ module.exports = {
         country: 'USA',
         lat: 10.96235,
         lng: 30.26534,
-        name: 'Louis Home',
-        description: 'Louis the doodles home',
+        name: 'Louis Home(2)',
+        description: 'Louis the doodles second home.',
         price: 5000.00
       }
     ], options)

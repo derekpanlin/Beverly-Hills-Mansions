@@ -255,6 +255,26 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     const { spotId } = req.params;
     const { url, preview } = req.body;
 
+    try {
+        const spot = await Spot.findByPk(spotId);
+        if (!spot) {
+            return res.status(404).json({
+                message: "Spot couldn't be found"
+            });
+        }
+
+        if (spot.ownerId !== req.user.id) {
+            return res.status(403).json({
+                message: "Unauthorized: Spot doesn't belong to the current user"
+            });
+        }
+
+        const newImage = await SpotImage.create({ url, preview, spotId });
+
+        res.status(200).json(newImage);
+    } catch (err) {
+        next(err)
+    }
 
 });
 
