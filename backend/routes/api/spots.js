@@ -122,13 +122,67 @@ router.get('/', async (req, res, next) => {
 
 router.get('/current', requireAuth, async (req, res, next) => {
     try {
+        // Fetch all spots from db
         const spots = await Spot.findAll({
             where: {
                 ownerId: req.user.id
-            }
+            },
+            attributes: [
+                'id',
+                'ownerId',
+                'address',
+                'city',
+                'state',
+                'country',
+                'lat',
+                'lng',
+                'name',
+                'description',
+                'price',
+                'createdAt',
+                'updatedAt'
+            ],
+            include: [
+                {
+                    model: Review,
+                    attributes: ['stars'],
+                    required: false
+                },
+                {
+                    model: SpotImage,
+                    where: { preview: true },
+                    attributes: ['url'],
+                    required: false
+                }
+            ],
+
         });
 
-        res.status(200).json({ Spots: spots })
+        // Calculate average rating for each spot
+        const formattedSpots = spots.map(spot => {
+            const numReviews = spot.Reviews.length;
+            const avgStarRating = numReviews > 0 ? spot.Reviews.reduce((acc, cur) => acc + cur.stars, 0) / numReviews : 0;
+
+            return {
+                id: spot.id,
+                ownerId: spot.ownerId,
+                address: spot.address,
+                city: spot.city,
+                state: spot.state,
+                country: spot.country,
+                lat: spot.lat,
+                lng: spot.lng,
+                name: spot.name,
+                description: spot.description,
+                price: spot.price,
+                createdAt: spot.createdAt,
+                updatedAt: spot.updatedAt,
+                avgRating: avgStarRating,
+                previewImage: spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null
+            };
+        });
+
+        res.status(200).json({ Spots: formattedSpots });
     } catch (err) {
         next(err);
     }
@@ -238,6 +292,12 @@ router.post('/', requireAuth, validateSpotData, async (req, res, next) => {
     }
 })
 
+// EDIT A SPOT
+// PUT /api/spots/:spotId
+
+
+// DELETE A SPOT
+// DELETE /api/spots/:spotId
 
 
 
