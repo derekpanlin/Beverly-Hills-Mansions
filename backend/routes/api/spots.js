@@ -287,6 +287,48 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 // EDIT A SPOT
 // PUT /api/spots/:spotId
 
+router.put('/:spotId', requireAuth, validateSpotData, async (req, res, next) => {
+    const { spotId } = req.params;
+
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+    try {
+        const spot = await Spot.findByPk(spotId);
+
+        // Check if spot exists
+        if (!spot) {
+            return res.status(404).json({ message: "Spot couldn't be found" })
+        }
+
+        // Check if spot belongs to the current user
+        if (spot.ownerId !== req.user.id) {
+            return res.status(403).json({
+                message: "Unauthorized: Spot doesn't belong to current user"
+            })
+        }
+
+        // Update the spot with the new data
+        spot.address = address;
+        spot.city = city;
+        spot.state = state;
+        spot.country = country;
+        spot.lat = lat;
+        spot.lng = lng;
+        spot.name = name;
+        spot.description = description;
+        spot.price = price;
+
+        // Save updated spot
+        await spot.save();
+
+        res.status(200).json(spot);
+
+
+    } catch (err) {
+        next(err)
+    }
+
+})
 
 // DELETE A SPOT
 // DELETE /api/spots/:spotId
