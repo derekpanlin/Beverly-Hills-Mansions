@@ -11,6 +11,7 @@ if (process.env.NODE_ENV === 'production') {
 
 options.validate = true;
 options.tableName = 'ReviewImages';
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
