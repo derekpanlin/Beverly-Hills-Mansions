@@ -82,7 +82,7 @@ module.exports = {
         review: 'Would stay again.',
         stars: 5
       }
-    ])
+    ], options)
   },
 
   async down(queryInterface, Sequelize) {

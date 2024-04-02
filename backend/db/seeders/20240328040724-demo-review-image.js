@@ -59,7 +59,7 @@ module.exports = {
         url: 'review image url 3',
         reviewId: 11
       },
-    ])
+    ], options)
   },
 
   async down(queryInterface, Sequelize) {
