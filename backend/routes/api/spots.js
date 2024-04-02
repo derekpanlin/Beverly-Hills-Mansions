@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Sequelize } = require('sequelize');
 
-const { Spot, SpotImage, User, Review } = require('../../db/models');
+const { Spot, SpotImage, User, Review, ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth')
 const { validateSpotData } = require('../../utils/validation')
 
@@ -362,6 +362,62 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
         next(err);
     }
 })
+
+// Get all reviews by a spot's ID
+// GET /api/spots/:spotId/reviews
+
+router.get('/:spotId/reviews', async (req, res, next) => {
+    const { spotId } = req.params;
+
+    try {
+        // Find spot by id
+        const spot = await Spot.findByPk(spotId);
+        if (!spot) {
+            return res.status(404).json({
+                message: "Spot couldn't be found"
+            });
+        }
+
+        // Find all reviews for that spot
+        const reviews = await Review.findAll({
+            where: { spotId },
+            include: [
+                { model: User, attributes: ['id', 'firstName', 'lastName'] },
+                { model: ReviewImage, attributes: ['id', 'url'] }
+            ]
+        });
+
+        if (!reviews.length) {
+            return res.status(404).json({
+                message: "Spot has no reviews"
+            });
+        } else {
+            return res.status(200).json({ Reviews: reviews })
+        }
+        // Lazy load
+        // const reviewsById = reviews.map(review => ({
+        //     id: review.id,
+        //     userId: review.userId,
+        //     spotId: review.spotId,
+        //     review: review.review,
+        //     stars: review.stars,
+        //     createdAt: review.createdAt,
+        //     updatedAt: review.updatedAt,
+        //     User: {
+        //         id: review.User.id,
+        //         firstName: review.User.firstName,
+        //         lastName: review.User.lastName
+        //     },
+        //     ReviewImages: review.ReviewImage.map(image => ({
+        //         id: image.id,
+        //         url: image.url
+        //     }))
+        // }));
+
+    } catch (err) {
+        next(err);
+    }
+});
 
 
 

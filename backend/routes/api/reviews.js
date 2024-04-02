@@ -53,54 +53,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
     }
 });
 
-// Get all reviews by a spot's ID
-// GET /api/spots/:spotId/reviews
 
-router.get('/:spotId/reviews', async (req, res, next) => {
-    const { spotId } = req.params;
 
-    try {
-        // Find spot by id
-        const spot = await Spot.findByPk(spotId);
-        if (!spot) {
-            return res.status(404).json({
-                message: "Spot couldn't be found"
-            });
-        }
+// Create a review for a spot based on the spot's id
+// POST /api/spots/:spotId/reviews
 
-        // Find all reviews for that spot
-        const reviews = await Review.findAll({
-            where: { spotId },
-            include: [
-                { model: User, attributes: ['id', 'firstName', 'lastName'] },
-                { model: ReviewImage, attributes: ['id', 'url'] }
-            ]
-        });
-
-        // Lazy load
-        const reviewsById = reviews.map(review => ({
-            id: review.id,
-            userId: review.userId,
-            spotId: review.spotId,
-            review: review.review,
-            stars: review.stars,
-            createdAt: review.createdAt,
-            updatedAt: review.updatedAt,
-            User: {
-                id: review.User.id,
-                firstName: review.User.firstName,
-                lastName: review.User.lastName
-            },
-            ReviewImages: review.ReviewImages.map(image => ({
-                id: image.id,
-                url: image.url
-            }))
-        }));
-
-        res.status(200).json({ Reviews: reviewsById })
-    } catch (err) {
-        next(err);
-    }
-});
+// router.post
 
 module.exports = router;
