@@ -45,7 +45,7 @@ module.exports = {
         preview: true,
         spotId: 6
       }
-    ])
+    ], options)
   },
 
   async down(queryInterface, Sequelize) {
