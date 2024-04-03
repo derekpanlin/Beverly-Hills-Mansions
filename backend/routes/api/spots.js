@@ -442,6 +442,9 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         if (existingReview) {
             return res.status(500).json({ message: "User already has a review for this spot" })
         };
+        
+        // Validate the request body
+        
 
 
     } catch (err) {
