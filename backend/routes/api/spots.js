@@ -5,7 +5,7 @@ const { Sequelize } = require('sequelize');
 const { Spot, SpotImage, User, Review, ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth')
 const { validateSpotData, handleValidationErrors } = require('../../utils/validation')
-const { validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 
 // GET All spots --> /api/spots
 

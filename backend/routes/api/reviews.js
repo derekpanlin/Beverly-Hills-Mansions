@@ -4,7 +4,10 @@ const { Sequelize } = require('sequelize');
 
 const { Spot, SpotImage, User, Review, ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth')
-const { validateSpotData } = require('../../utils/validation');
+const { validateSpotData, handleValidationErrors } = require('../../utils/validation');
+const { check, validationResult } = require('express-validator');
+
+
 
 // Get all reviews of the current user
 // GET /api/reviews/current
@@ -55,10 +58,17 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
 
 
+// Custom validation for validating review data
+const validateReview = [
+    check('review').notEmpty().withMessage('Review text is required'),
+    check('stars').isInt({ min: 1, max: 5 }).withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors,
+];
+
 // Add an image to a review based on the review's id
 // POST /api/reviews/:reviewId/images
 
-router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
+router.post('/:reviewId/images', requireAuth, validateReview, handleValidationErrors, async (req, res, next) => {
     const { reviewId } = req.params;
     const { url } = req.body
 
@@ -97,8 +107,47 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 // EDIT A REVIEW
 // PUT /api/reviews/:reviewId
 
-router.put('/:reviewId', requireAuth, async (req, res, next) => {
-    
+router.put('/:reviewId', requireAuth, validateReview, handleValidationErrors, async (req, res, next) => {
+    const { reviewId } = req.params;
+    const { review, stars } = req.body;
+
+    try {
+        // Check if existing review exists 
+        const existingReview = await Review.findByPk(reviewId);
+        if (!existingReview) {
+            return res.status(404).json({
+                message: "Review couldn't be found"
+            })
+        };
+
+        // Check if current user owns the review
+        if (existingReview.userId !== req.user.id) {
+            return res.status(403).json({
+                message: "Unauthorized: Review doesn't belong to current user"
+            })
+        };
+
+        // Updated the review
+        await existingReview.update({ review, stars });
+
+        // Fetch new updated review
+        const updatedReview = await Review.findByPk(reviewId);
+
+        res.status(200).json(updatedReview)
+
+
+    } catch (err) {
+        next(err);
+    }
+});
+
+// DELETE AN EXISTING REVIEW
+// DELETE /api/reviews/:reviewId
+
+router.delete('/:reviewId', requireAuth, async (req, res, next) => {
+    const { reviewId } = req.params;
+
+
 })
 
 module.exports = router;
