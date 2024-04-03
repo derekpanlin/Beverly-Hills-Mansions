@@ -56,10 +56,6 @@ module.exports = {
         url: 'review image url 10',
         reviewId: 10
       },
-      {
-        url: 'review image url 11',
-        reviewId: 11
-      },
     ], options)
   },
 

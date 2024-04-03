@@ -59,12 +59,6 @@ module.exports = {
         stars: 5
       },
       {
-        userId: 2,
-        spotId: 6,
-        review: 'WE ARE NEVER COMING BACK!',
-        stars: 1
-      },
-      {
         userId: 3,
         spotId: 1,
         review: 'I will not stay here.',

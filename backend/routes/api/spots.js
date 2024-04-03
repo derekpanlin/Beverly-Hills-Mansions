@@ -4,7 +4,7 @@ const { Sequelize } = require('sequelize');
 
 const { Spot, SpotImage, User, Review, ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth')
-const { validateSpotData } = require('../../utils/validation')
+const { validateSpotData, handleValidationErrors } = require('../../utils/validation')
 const { validationResult } = require('express-validator');
 
 // GET All spots --> /api/spots
@@ -395,26 +395,6 @@ router.get('/:spotId/reviews', async (req, res, next) => {
         } else {
             return res.status(200).json({ Reviews: reviews })
         }
-        // Lazy load
-        // const reviewsById = reviews.map(review => ({
-        //     id: review.id,
-        //     userId: review.userId,
-        //     spotId: review.spotId,
-        //     review: review.review,
-        //     stars: review.stars,
-        //     createdAt: review.createdAt,
-        //     updatedAt: review.updatedAt,
-        //     User: {
-        //         id: review.User.id,
-        //         firstName: review.User.firstName,
-        //         lastName: review.User.lastName
-        //     },
-        //     ReviewImages: review.ReviewImage.map(image => ({
-        //         id: image.id,
-        //         url: image.url
-        //     }))
-        // }));
-
     } catch (err) {
         next(err);
     }
@@ -423,7 +403,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 // Create a review for a spot based on the spot's id
 // POST /api/spots/:spotId/reviews
 
-router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+router.post('/:spotId/reviews', requireAuth, handleValidationErrors, async (req, res, next) => {
     const { spotId } = req.params;
     const { review, stars } = req.body;
 
@@ -442,15 +422,33 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         if (existingReview) {
             return res.status(500).json({ message: "User already has a review for this spot" })
         };
-        
-        // Validate the request body
-        
+
+        // Create review
+        const newReview = await Review.create({
+            userId: req.user.id,
+            spotId,
+            review,
+            stars
+        });
+
+        res.status(201).json(newReview);
 
 
     } catch (err) {
+        if (err.name === 'SequelizeValidationError') {
+            const errors = {};
+            err.errors.forEach(error => {
+                errors[error.path] = error.message;
+            });
+            return res.status(400).json({ message: 'Bad Request', errors });
+        }
         next(err);
+
     }
-})
+});
+
+
+
 
 
 
