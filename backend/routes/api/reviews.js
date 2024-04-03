@@ -147,7 +147,30 @@ router.put('/:reviewId', requireAuth, validateReview, handleValidationErrors, as
 router.delete('/:reviewId', requireAuth, async (req, res, next) => {
     const { reviewId } = req.params;
 
+    try {
+        // Review must belong to current user
+        const existingReview = await Review.findByPk(reviewId);
+        if (!existingReview) {
+            return res.status(404).json({
+                message: "Review couldn't be found"
+            })
+        };
 
+        if (existingReview.userId !== req.user.id) {
+            return res.status(403).json({
+                message: "Unauthorized: Review doesn't belong to current user"
+            })
+        };
+
+        // Delete the review
+        await existingReview.destroy();
+
+        res.status(200).json({
+            message: "Successfully deleted"
+        })
+    } catch (err) {
+        next(err)
+    }
 })
 
 module.exports = router;
