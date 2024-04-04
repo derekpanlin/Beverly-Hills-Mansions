@@ -81,13 +81,21 @@ app.use((err, _req, _res, next) => {
 app.use((err, _req, res, _next) => {
     res.status(err.status || 500);
     console.error(err);
-    res.json({
+    const responseData = {
         title: err.title || 'Server Error',
         message: err.message,
-        errors: err.errors,
-        stack: isProduction ? null : err.stack
-    });
+        errors: err.errors
+    };
+    // Check if in production environment
+    if (process.env.NODE_ENV === 'production') {
+        // Do not include stack trace
+        res.json(responseData);
+    } else {
+        // Include stack trace
+        res.json({ ...responseData, stack: err.stack });
+    }
 });
+
 
 
 
