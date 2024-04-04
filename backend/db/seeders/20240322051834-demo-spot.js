@@ -87,15 +87,6 @@ module.exports = {
         price: 5000.00
       }
     ], options)
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
   },
 
   async down(queryInterface, Sequelize) {
