@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Sequelize } = require('sequelize');
 
-const { Spot, SpotImage, User, Review, ReviewImage } = require('../../db/models');
+const { Spot, SpotImage, User, Review, ReviewImage, Booking } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth')
 const { validateSpotData, handleValidationErrors } = require('../../utils/validation')
 const { check, validationResult } = require('express-validator');
@@ -447,6 +447,49 @@ router.post('/:spotId/reviews', requireAuth, handleValidationErrors, async (req,
     }
 });
 
+// GET ALL BOOKINGS FOR A SPOT BASED ON SPOT'S ID
+// GET /api/spots/:spotId/bookings
+
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const { spotId } = req.params;
+
+    try {
+        const spot = await Spot.findByPk(spotId);
+        // console.log(spot)
+
+        if (!spot) {
+            return res.status(404).json({
+                message: "Spot couldn't be found"
+            })
+        }
+
+        // Fetch bookings for the spot
+        let bookings = await Booking.findAll({
+            where: { spotId },
+            include: {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            }
+        })
+
+        // If current user is owner, include user details in body
+        if (req.user.id === spot.ownerId) {
+            res.json({ Bookings: bookings });
+        } else {
+            // If current user isn't owner, just show the bookings
+            bookings = bookings.map(booking => {
+                return {
+                    spotId: booking.spotId,
+                    startDate: booking.startDate,
+                    endDate: booking.endDate
+                };
+            });
+            res.json({ Bookings: bookings })
+        }
+    } catch (err) {
+        next(err)
+    }
+})
 
 
 

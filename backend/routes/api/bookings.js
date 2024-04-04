@@ -31,19 +31,16 @@ router.get('/current', requireAuth, async (req, res) => {
     bookings.forEach(booking => {
         const jsonBooking = booking.toJSON()
 
-
-
-        console.log(jsonBooking)
-
         // get previewImage
         jsonBooking.Spot.SpotImages.forEach((image) => {
             if (image.preview) {
                 jsonBooking.Spot.previewImage = image.url;
             }
         });
-        if (!jsonBooking.Spot.previewImage) jsonBooking.Spot.previewImage = "no preview image found";
-        delete jsonBooking.Spot.SpotImages;
 
+        if (!jsonBooking.Spot.previewImage) jsonBooking.Spot.previewImage = "No preview image found";
+        // Delete queries not included in body
+        delete jsonBooking.Spot.SpotImages;
         delete jsonBooking.Spot.description
         delete jsonBooking.Spot.createdAt
         delete jsonBooking.Spot.updatedAt
@@ -59,5 +56,7 @@ router.get('/current', requireAuth, async (req, res) => {
         Bookings: userBookings
     })
 });
+
+
 
 module.exports = router;
