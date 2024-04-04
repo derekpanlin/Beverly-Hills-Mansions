@@ -515,6 +515,13 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             })
         }
 
+        // Check if endDate is after startDate
+        if (new Date(endDate) <= new Date(startDate)) {
+            return res.status(400).json({
+                message: "End date must be after start date"
+            })
+        }
+
         // Check if spot has booking conflict
         const existingBooking = await Booking.findOne({
             where: {
