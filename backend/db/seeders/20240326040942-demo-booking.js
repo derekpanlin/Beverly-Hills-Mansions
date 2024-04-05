@@ -84,12 +84,12 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
+
+    options.truncate = true;
+    options.cascade = true;
+    options.restartIdentity = true;
+
     await queryInterface.bulkDelete(options, null, {})
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+
   }
 };
