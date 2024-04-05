@@ -41,6 +41,10 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete(options, null, {});
+    options.truncate = true;
+    options.cascade = true;
+    options.restartIdentity = true;
+
+    await queryInterface.bulkDelete(options, null, {});
   }
 };

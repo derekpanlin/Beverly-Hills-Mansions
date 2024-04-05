@@ -52,22 +52,8 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    // Specify the table name
-    const tableName = 'Users';
 
-    // Specify the where condition to delete all records
-    const where = {};
 
-    // Specify the options
-    const truncateOptions = {
-      truncate: true, // Use truncate table command
-      restartIdentity: true // Automatically restart sequences owned by columns of the truncated table
-    };
-
-    // Use the bulkDelete method to delete all records and reset auto-increment
-    await queryInterface.bulkDelete(tableName, where, truncateOptions);
-
-    // Drop the table
     await queryInterface.dropTable('Users', options);
   }
 };
