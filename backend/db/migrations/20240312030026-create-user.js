@@ -5,6 +5,8 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
+options.tableName = 'Users';
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -34,7 +36,7 @@ module.exports = {
         unique: true
       },
       hashedPassword: {
-        type: Sequelize.STRING(15),
+        type: Sequelize.STRING(60),
         allowNull: false
       },
       createdAt: {
@@ -50,6 +52,22 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
+    // Specify the table name
+    const tableName = 'Users';
+
+    // Specify the where condition to delete all records
+    const where = {};
+
+    // Specify the options
+    const truncateOptions = {
+      truncate: true, // Use truncate table command
+      restartIdentity: true // Automatically restart sequences owned by columns of the truncated table
+    };
+
+    // Use the bulkDelete method to delete all records and reset auto-increment
+    await queryInterface.bulkDelete(tableName, where, truncateOptions);
+
+    // Drop the table
     await queryInterface.dropTable('Users', options);
   }
 };
