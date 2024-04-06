@@ -69,10 +69,6 @@ router.post('/',
             })
         };
 
-
-
-
-
         const user = await User.create({ email, firstName, lastName, username, hashedPassword });
 
         const safeUser = {
