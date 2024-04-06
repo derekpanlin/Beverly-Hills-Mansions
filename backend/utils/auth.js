@@ -1,7 +1,7 @@
 // backend/utils/auth.js
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
-const { User } = require('../db/models');
+const { User, Booking, Spot, Review } = require('../db/models');
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -73,4 +73,49 @@ const requireAuth = function (req, _res, next) {
     return next(err);
 }
 
-module.exports = { setTokenCookie, restoreUser, requireAuth };
+// IF THE USER IS NOT AUTHORIZED, THROW AN ERROR
+const authorize = async function (req, _res, next) {
+    const userId = req.user.id;
+
+    if (req.params.spotId) {
+        const spot = await Spot.findByPk(req.params.spotId);
+        if (!spot || spot.ownerId !== userId) {
+            const err = new Error('Spot not found or you are not the owner');
+            err.status = 403;
+            return next(err);
+        } else if (spot) {
+            if (spot.ownerId === userId) {
+                return next();
+            }
+        }
+    }
+
+    if (req.params.reviewId) {
+        const review = await Review.findByPk(req.params.reviewId);
+        if (!review || review.userId !== userId) {
+            const err = new Error('Review not found or you are not the owner');
+            err.status = 403;
+            return next(err);
+        }
+    }
+
+    if (req.params.bookingId) {
+        const booking = await Booking.findByPk(req.params.bookingId);
+        if (!booking || booking.userId !== userId) {
+            const err = new Error('Booking not found or you are not the owner');
+            err.status = 403;
+            return next(err);
+        } else if (booking) {
+            if (booking.userId === userId) {
+                return next();
+            }
+        }
+    }
+
+    // No matching condition, return Forbidden error
+    const err = new Error('Forbidden');
+    err.status = 403;
+    return next(err);
+}
+
+module.exports = { setTokenCookie, restoreUser, requireAuth, authorize };
