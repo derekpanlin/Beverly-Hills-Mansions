@@ -252,44 +252,28 @@ router.get('/:spotId', async (req, res, next) => {
 // CREATE A SPOT
 // POST /api/spots
 
-router.post('/', requireAuth, validateSpotData, async (req, res, next) => {
-    try {
-        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+router.post('/', requireAuth, validateSpot, async (req, res, next) => {
 
-        const spot = await Spot.create({
-            address,
-            city,
-            state,
-            country,
-            lat,
-            lng,
-            name,
-            description,
-            price,
-            ownerId: req.user.id,
-            createdAt: new Date(),
-            updatedAt: new Date()
-        });
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
-        res.status(201).json({
-            id: spot.id,
-            ownerId: spot.ownerId,
-            address: spot.address,
-            city: spot.city,
-            state: spot.state,
-            country: spot.country,
-            lat: spot.lat,
-            lng: spot.lng,
-            name: spot.name,
-            description: spot.description,
-            price: spot.price,
-            createdAt: spot.createdAt,
-            updatedAt: spot.updatedAt
-        })
+    const newSpot = await Spot.create({
+        ownerId: req.user.id,
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    });
+    newSpot.lat = Number(newSpot.lat);
+    newSpot.lng = Number(newSpot.lng);
+    newSpot.price = Number(newSpot.price);
 
-    } catch (error) {
-        next(error);
-    }
+    res.status(201).json(newSpot);
+
 })
 
 // ADD AN IMAGE TO A SPOT BASED ON THE SPOT'S ID
