@@ -272,7 +272,22 @@ router.post('/', requireAuth, validateSpot, async (req, res, next) => {
     newSpot.lng = Number(newSpot.lng);
     newSpot.price = Number(newSpot.price);
 
-    res.status(201).json(newSpot);
+    const formattedSpot = {
+        id: newSpot.id,
+        ownerId: newSpot.ownerId,
+        address: newSpot.address,
+        city: newSpot.city,
+        state: newSpot.state,
+        country: newSpot.country,
+        lat: newSpot.lat,
+        lng: newSpot.lng,
+        name: newSpot.name,
+        description: newSpot.description,
+        price: newSpot.price,
+        createdAt: newSpot.createdAt,
+        updatedAt: newSpot.updatedAt,
+    }
+    res.status(201).json(formattedSpot);
 
 })
 
