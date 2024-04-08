@@ -7,6 +7,49 @@ const { requireAuth } = require('../../utils/auth')
 const { validateSpotData, handleValidationErrors } = require('../../utils/validation')
 const { check, validationResult } = require('express-validator');
 
+const validateSpot = [
+    check("address")
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("Street address is required"),
+    check("city")
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("City is required"),
+    check("state")
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("State is required"),
+    check("country")
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("Country is required"),
+    check("lat")
+        .isFloat({ min: -90, max: 90 })
+        .withMessage("Latitude must be within -90 and 90"),
+    check("lng")
+        .isFloat({ min: -180, max: 180 })
+        .withMessage("Longitude must be within -180 and 180"),
+    check("name")
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("Name is required"),
+    check("name")
+        .exists({ checkFalsy: false })
+        .isLength({ max: 50 })
+        .withMessage("Name must be less than 50 characters"),
+    check("description")
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage("Description is required"),
+    check("price")
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .isInt({ min: 1 })
+        .withMessage("Price per day must be a positive number"),
+    handleValidationErrors,
+];
+
 // GET All spots --> /api/spots
 
 router.get('/', async (req, res, next) => {
