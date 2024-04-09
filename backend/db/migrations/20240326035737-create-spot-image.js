@@ -30,7 +30,6 @@ module.exports = {
           model: 'Spots',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
       createdAt: {

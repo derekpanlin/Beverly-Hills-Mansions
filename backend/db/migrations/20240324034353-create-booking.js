@@ -22,7 +22,6 @@ module.exports = {
           model: 'Users',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
       spotId: {
@@ -32,7 +31,6 @@ module.exports = {
           model: 'Spots',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
       startDate: {

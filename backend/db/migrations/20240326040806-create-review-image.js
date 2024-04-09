@@ -25,7 +25,6 @@ module.exports = {
           model: 'Reviews',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
       createdAt: {
