@@ -79,7 +79,6 @@ router.post('/',
             username: user.username,
         };
 
-
         await setTokenCookie(res, safeUser);
 
         return res.json({

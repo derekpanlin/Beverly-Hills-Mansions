@@ -7,6 +7,13 @@ const { requireAuth } = require('../../utils/auth')
 const { validateSpotData, handleValidationErrors } = require('../../utils/validation');
 const { check, validationResult } = require('express-validator');
 
+// Custom validation for validating review data
+const validateReview = [
+    check('review').notEmpty().withMessage('Review text is required'),
+    check('stars').isInt({ min: 1, max: 5 }).withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors,
+];
+
 
 
 // Get all reviews of the current user
@@ -58,12 +65,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
 
 
-// Custom validation for validating review data
-const validateReview = [
-    check('review').notEmpty().withMessage('Review text is required'),
-    check('stars').isInt({ min: 1, max: 5 }).withMessage('Stars must be an integer from 1 to 5'),
-    handleValidationErrors,
-];
 
 // Add an image to a review based on the review's id
 // POST /api/reviews/:reviewId/images

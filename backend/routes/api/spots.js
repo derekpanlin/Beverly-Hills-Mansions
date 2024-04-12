@@ -50,6 +50,13 @@ const validateSpot = [
     handleValidationErrors,
 ];
 
+// Custom validation for validating review data
+const validateReview = [
+    check('review').notEmpty().withMessage('Review text is required'),
+    check('stars').isInt({ min: 1, max: 5 }).withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors,
+];
+
 const validateQuery = [
 
 ]
@@ -338,7 +345,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 // EDIT A SPOT
 // PUT /api/spots/:spotId
 
-router.put('/:spotId', requireAuth, validateSpotData, async (req, res, next) => {
+router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     const { spotId } = req.params;
 
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -372,8 +379,25 @@ router.put('/:spotId', requireAuth, validateSpotData, async (req, res, next) => 
         // Save updated spot
         await spot.save();
 
-        res.status(200).json(spot);
+        // Create a new object with the desired structure and order of properties
+        const formattedBody = {
+            id: spot.id,
+            ownerId: spot.ownerId,
+            address: spot.address,
+            city: spot.city,
+            state: spot.state,
+            country: spot.country,
+            lat: spot.lat,
+            lng: spot.lng,
+            name: spot.name,
+            description: spot.description,
+            price: spot.price,
+            createdAt: spot.createdAt,
+            updatedAt: spot.updatedAt
+        };
 
+        // Send the response with the new object
+        res.status(200).json(formattedBody);
 
     } catch (err) {
         next(err);
@@ -453,7 +477,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 // Create a review for a spot based on the spot's id
 // POST /api/spots/:spotId/reviews
 
-router.post('/:spotId/reviews', requireAuth, handleValidationErrors, async (req, res, next) => {
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, next) => {
     const { spotId } = req.params;
     const { review, stars } = req.body;
 
@@ -481,7 +505,17 @@ router.post('/:spotId/reviews', requireAuth, handleValidationErrors, async (req,
             stars
         });
 
-        res.status(201).json(newReview);
+        const formattedBody = {
+            id: newReview.id,
+            userId: newReview.userId,
+            spotId: newReview.spotId,
+            review: newReview.review,
+            stars: newReview.stars,
+            createdAt: newReview.createdAt,
+            updatedAt: newReview.updatedAt
+        }
+
+        res.status(201).json(formattedBody);
 
 
     } catch (err) {
@@ -490,6 +524,12 @@ router.post('/:spotId/reviews', requireAuth, handleValidationErrors, async (req,
             err.errors.forEach(error => {
                 errors[error.path] = error.message;
             });
+
+            // Add the review validation error if it exists
+            if (!errors.hasOwnProperty('review') && !req.body.review) {
+                errors.review = 'Review text is required';
+            }
+
             return res.status(400).json({ message: 'Bad Request', errors });
         }
         next(err);
