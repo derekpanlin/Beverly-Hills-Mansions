@@ -14,6 +14,11 @@ const validateReview = [
     handleValidationErrors,
 ];
 
+const validateReviewImage = [
+    check('url')
+        .notEmpty()
+        .withMessage('Image url is required')
+]
 
 
 // Get all reviews of the current user
@@ -69,9 +74,10 @@ router.get('/current', requireAuth, async (req, res, next) => {
 // Add an image to a review based on the review's id
 // POST /api/reviews/:reviewId/images
 
-router.post('/:reviewId/images', requireAuth, validateReview, handleValidationErrors, async (req, res, next) => {
+router.post('/:reviewId/images', requireAuth, validateReviewImage, async (req, res, next) => {
     const { reviewId } = req.params;
     const { url } = req.body
+
 
     try {
         // Check if review exists
@@ -94,6 +100,7 @@ router.post('/:reviewId/images', requireAuth, validateReview, handleValidationEr
         };
 
         // Create and return new image 
+
         const newImage = await ReviewImage.create({ url, reviewId });
         res.status(200).json({
             id: newImage.id,
