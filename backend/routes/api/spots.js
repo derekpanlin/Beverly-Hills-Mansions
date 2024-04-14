@@ -638,11 +638,21 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         const newBooking = await Booking.create({
             spotId: parseInt(spotId),
             userId: req.user.id,
-            startDate,
-            endDate
+            startDate: new Date(startDate), // Format the startDate
+            endDate: new Date(endDate) // Format the endDate
         });
 
-        res.status(200).json(newBooking);
+        const formattedBody = {
+            id: newBooking.id,
+            spotId: newBooking.spotId,
+            userId: newBooking.userId,
+            startDate: newBooking.startDate.toISOString().split('T')[0],
+            endDate: newBooking.endDate.toISOString().split('T')[0],
+            createdAt: newBooking.createdAt,
+            updatedAt: newBooking.updatedAt,
+        }
+
+        res.status(200).json(formattedBody);
 
     } catch (err) {
         next(err);

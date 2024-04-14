@@ -14,6 +14,7 @@ const validateReview = [
     handleValidationErrors,
 ];
 
+// Custom validation for validating review image
 const validateReviewImage = [
     check('url')
         .notEmpty()
@@ -50,6 +51,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 ownerId: review.Spot.ownerId,
                 address: review.Spot.address,
                 city: review.Spot.city,
+                state: review.Spot.state,
                 country: review.Spot.country,
                 lat: review.Spot.lat,
                 lng: review.Spot.lng,
@@ -138,7 +140,7 @@ router.put('/:reviewId', requireAuth, validateReview, handleValidationErrors, as
         // Updated the review
         await existingReview.update({ review, stars });
 
-        // Fetch new updated review
+        // Have to refetch the new updated review
         const updatedReview = await Review.findByPk(reviewId);
 
         res.status(200).json(updatedReview)
