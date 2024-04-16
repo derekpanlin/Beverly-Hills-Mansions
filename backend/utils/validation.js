@@ -1,6 +1,8 @@
 // backend/utils/validation.js
 
-const { validationResult } = require('express-validator');
+const { validationResult, check } = require('express-validator');
+const { Op } = require('sequelize');
+const Booking = require('../db/models/booking')
 
 // middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
@@ -22,52 +24,64 @@ const handleValidationErrors = (req, _res, next) => {
     next();
 };
 
-// Custom validation for validating spot data
-function validateSpotData(req, res, next) {
-    const errors = {};
+// Custom validation for startDate
+const validateStartDate = check('startDate')
+    .custom(async (value, { req }) => {
+        // Create a variable to store current date
+        const currentDate = new Date();
+        // Compare if new value is before currentDate
+        if (new Date(value) < currentDate) {
+            throw new Error('startDate cannot be in the past');
+        }
 
-    // Check if required fields are present
-    if (!req.body.address) {
-        errors.address = "Street address is required";
-    }
-    if (!req.body.city) {
-        errors.city = "City is required";
-    }
-    if (!req.body.state) {
-        errors.state = "State is required";
-    }
-    if (!req.body.country) {
-        errors.country = "Country is required";
-    }
-    if (!req.body.lat || req.body.lat < -90 || req.body.lat > 90) {
-        errors.lat = "Latitude must be within -90 and 90";
-    }
-    if (!req.body.lng || req.body.lng < -180 || req.body.lng > 180) {
-        errors.lng = "Longitude must be within -180 and 180";
-    }
-    if (!req.body.name || req.body.name.length >= 50) {
-        errors.name = "Name must be less than 50 characters";
-    }
-    if (!req.body.description) {
-        errors.description = "Description is required";
-    }
-    if (!req.body.price || req.body.price <= 0) {
-        errors.price = "Price per day must be a positive number";
-    }
+        // Find existing booking
+        const existingBooking = await Booking.findOne({
+            where: {
+                spotId: req.params.spotId,
+                [Op.or]: [
+                    // Check if req.body.startDate (value) is between an existing bookings startDate and endDate
+                    { startDate: { [Op.lte]: value }, endDate: { [Op.gte]: value } },
+                    // Check if booking startDate is less than/equal to value, and booking endDate greater than/equal to req.body.endDate
+                    { startDate: { [Op.lte]: value }, endDate: { [Op.gte]: req.body.endDate } },
+                    // Check if provided startDate is after/equal to existing booking startDate, and if existing endDate is before req endDate
+                    { startDate: { [Op.gte]: value }, endDate: { [Op.lte]: req.body.endDate } },
+                    // Check if existing startDate is before the req end date, and the existing endDate is after req endDate
+                    { startDate: { [Op.lte]: req.body.endDate }, endDate: { [Op.gte]: req.body.endDate } }
+                ]
+            }
+        })
+        if (existingBooking) {
+            throw new Error('Start date conflicts with an existing booking')
+        }
+        return true;
+    })
 
-    // If there are errors, respond with 400 and the error object
-    if (Object.keys(errors).length > 0) {
-        return res.status(400).json({
-            message: "Bad Request",
-            errors
+// Custom validation for endDate
+const validateEndDate = check('endDate')
+    .custom(async (value, { req }) => {
+        if (new Date(value) <= new Date(req.body.startDate)) {
+            throw new Error('endDate cannot be on or before startDate');
+        }
+        const existingBooking = await Booking.findOne({
+            where: {
+                spotId: req.params.spotId,
+                [Op.or]: [
+                    // Check if req endDate is between booking start and endDate
+                    { startDate: { [Op.lte]: value }, endDate: { [Op.gte]: value } },
+                    // Check if req endDate 
+                    { startDate: { [Op.lte]: value }, endDate: { [Op.gte]: req.body.startDate } },
+                    { startDate: { [Op.gte]: value }, endDate: { [Op.lte]: req.body.startDate } },
+                    { startDate: { [Op.lte]: req.body.startDate }, endDate: { [Op.gte]: req.body.startDate } }
+                ]
+            }
         });
-    }
-
-    // If validation passes, move to the next middleware
-    next();
-}
-
+        if (existingBooking) {
+            throw new Error('End date conflicts with an existing booking');
+        }
+        return true;
+    });
 module.exports = {
     handleValidationErrors,
-    validateSpotData
+    validateStartDate,
+    validateEndDate
 };
