@@ -13,6 +13,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        unique: true,
         type: Sequelize.INTEGER
       },
       url: {

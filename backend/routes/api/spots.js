@@ -4,7 +4,7 @@ const { Sequelize, Op } = require('sequelize');
 
 const { Spot, SpotImage, User, Review, ReviewImage, Booking } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth')
-const { validateSpotData, handleValidationErrors } = require('../../utils/validation')
+const { handleValidationErrors, validateStartDate, validateEndDate } = require('../../utils/validation')
 const { check, validationResult } = require('express-validator');
 
 const validateSpot = [
@@ -55,6 +55,53 @@ const validateReview = [
     check('review').notEmpty().withMessage('Review text is required'),
     check('stars').isInt({ min: 1, max: 5 }).withMessage('Stars must be an integer from 1 to 5'),
     handleValidationErrors,
+];
+
+const validateBooking = [
+    check('startDate').custom(async (startDate, { req }) => {
+        const currentDate = new Date();
+        if (new Date(startDate) < currentDate) {
+            throw new Error('startDate cannot be in the past');
+        }
+
+        const existingBooking = await Booking.findOne({
+            where: {
+                spotId: parseInt(req.params.spotId),
+                [Op.or]: [
+                    { startDate: { [Op.eq]: startDate } }, // Check if startDate matches an existing booking's startDate
+                    { endDate: { [Op.eq]: startDate } },   // Check if startDate matches an existing booking's endDate
+                    { startDate: { [Op.lt]: startDate }, endDate: { [Op.gt]: startDate } } // Check if startDate falls within an existing booking's startDate and endDate
+                ]
+            }
+        });
+
+        if (existingBooking) {
+            throw new Error('Start date conflicts with an existing booking');
+        }
+
+    }),
+    check('endDate').custom(async (endDate, { req }) => {
+        if (new Date(endDate) <= new Date(req.body.startDate)) {
+            throw new Error('endDate cannot be on or before startDate');
+        }
+
+        const existingBooking = await Booking.findOne({
+            where: {
+                spotId: parseInt(req.params.spotId),
+                [Op.or]: [
+                    { startDate: { [Op.eq]: endDate } }, // Check if endDate matches an existing booking's startDate
+                    { endDate: { [Op.eq]: endDate } },   // Check if endDate matches an existing booking's endDate
+                    { startDate: { [Op.lt]: endDate }, endDate: { [Op.gt]: endDate } } // Check if endDate falls within an existing booking's startDate and endDate
+                ]
+            }
+        });
+
+        if (existingBooking) {
+            throw new Error('End date conflicts with an existing booking');
+        }
+
+    }),
+    handleValidationErrors
 ];
 
 const validateQuery = [
@@ -584,7 +631,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 // CREATE A BOOKING FROM A SPOT BASED ON THE SPOT'S ID
 // POST /api/spots/:spotId/bookings
 
-router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res, next) => {
     const { spotId } = req.params;
     const { startDate, endDate } = req.body;
 
@@ -605,34 +652,21 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             })
         }
 
-        // Check if endDate is after startDate
-        if (new Date(endDate) <= new Date(startDate)) {
-            return res.status(400).json({
-                message: "End date cannot be on or before the start date"
-            })
-        }
 
-        // Check if spot has booking conflict
-        const existingBooking = await Booking.findOne({
+        const startDateConflict = await Booking.findOne({
             where: {
                 spotId,
-                [Op.or]: [
-                    { startDate: { [Op.between]: [startDate, endDate] } },
-                    { endDate: { [Op.between]: [startDate, endDate] } }
-                ]
+                startDate: { [Op.eq]: startDate }
             }
         });
-
-        // If conflict exists, send error message
-        if (existingBooking) {
+        if (startDateConflict) {
             return res.status(403).json({
                 message: "Sorry, this spot is already booked for the specified dates",
                 errors: {
-                    startDate: "Start date conflicts with an existing booking",
-                    endDate: "End date conflicts with an existing booking"
+                    startDate: "Start date conflicts with an existing booking"
                 }
             });
-        };
+        }
 
         // Create the booking 
         const newBooking = await Booking.create({

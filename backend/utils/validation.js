@@ -31,7 +31,10 @@ const validateStartDate = check('startDate')
         const currentDate = new Date();
         // Compare if new value is before currentDate
         if (new Date(value) < currentDate) {
-            throw new Error('startDate cannot be in the past');
+            const error = new Error('startDate cannot be in the past');
+            error.status = 400;
+            error.errors = { startDate: 'startDate cannot be in the past' };
+            throw error;
         }
 
         // Find existing booking
@@ -39,19 +42,22 @@ const validateStartDate = check('startDate')
             where: {
                 spotId: req.params.spotId,
                 [Op.or]: [
-                    // Check if req.body.startDate (value) is between an existing bookings startDate and endDate
+                    // Check if req.startDate is within an existing booking's startDate and endDate
                     { startDate: { [Op.lte]: value }, endDate: { [Op.gte]: value } },
-                    // Check if booking startDate is less than/equal to value, and booking endDate greater than/equal to req.body.endDate
-                    { startDate: { [Op.lte]: value }, endDate: { [Op.gte]: req.body.endDate } },
-                    // Check if provided startDate is after/equal to existing booking startDate, and if existing endDate is before req endDate
-                    { startDate: { [Op.gte]: value }, endDate: { [Op.lte]: req.body.endDate } },
-                    // Check if existing startDate is before the req end date, and the existing endDate is after req endDate
-                    { startDate: { [Op.lte]: req.body.endDate }, endDate: { [Op.gte]: req.body.endDate } }
+                    // Check if req.startDate is on an existing startDate
+                    { startDate: value },
+                    // Check if req.startDate is on an existing endDate
+                    { endDate: value },
+                    // Check if req.startDate is during an existing booking’s startDate and endDate
+                    { startDate: { [Op.lt]: value }, endDate: { [Op.gt]: value } }
                 ]
             }
-        })
+        });
         if (existingBooking) {
-            throw new Error('Start date conflicts with an existing booking')
+            const error = new Error('Start date conflicts with an existing booking');
+            error.status = 400;
+            error.errors = { startDate: 'Start date conflicts with an existing booking' };
+            throw error;
         }
         return true;
     })
@@ -60,26 +66,36 @@ const validateStartDate = check('startDate')
 const validateEndDate = check('endDate')
     .custom(async (value, { req }) => {
         if (new Date(value) <= new Date(req.body.startDate)) {
-            throw new Error('endDate cannot be on or before startDate');
+            const error = new Error('endDate cannot be on or before startDate');
+            error.status = 400;
+            error.errors = { endDate: 'endDate cannot be on or before startDate' }
+            throw error;
         }
+        // Find existing booking
         const existingBooking = await Booking.findOne({
             where: {
                 spotId: req.params.spotId,
                 [Op.or]: [
-                    // Check if req endDate is between booking start and endDate
+                    // Check if req.endDate is within an existing booking's startDate and endDate
                     { startDate: { [Op.lte]: value }, endDate: { [Op.gte]: value } },
-                    // Check if req endDate 
-                    { startDate: { [Op.lte]: value }, endDate: { [Op.gte]: req.body.startDate } },
-                    { startDate: { [Op.gte]: value }, endDate: { [Op.lte]: req.body.startDate } },
-                    { startDate: { [Op.lte]: req.body.startDate }, endDate: { [Op.gte]: req.body.startDate } }
+                    // Check if req.endDate is on an existing startDate
+                    { startDate: value },
+                    // Check if req.endDate is on an existing endDate
+                    { endDate: value },
+                    // Check if req.endDate is during an existing booking’s startDate and endDate
+                    { startDate: { [Op.lt]: value }, endDate: { [Op.gt]: value } }
                 ]
             }
         });
         if (existingBooking) {
-            throw new Error('End date conflicts with an existing booking');
+            const error = new Error('End date conflicts with an existing booking');
+            error.status = 400;
+            error.errors = { endDate: 'End date conflicts with an existing booking' };
+            throw error;
         }
         return true;
     });
+
 module.exports = {
     handleValidationErrors,
     validateStartDate,

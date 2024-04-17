@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         len: [1, 20]
       }
