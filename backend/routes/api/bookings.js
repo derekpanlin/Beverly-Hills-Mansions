@@ -74,6 +74,11 @@ router.get('/current', requireAuth, async (req, res) => {
         delete jsonBooking.Spot.createdAt
         delete jsonBooking.Spot.updatedAt
 
+        // Format the jsonBooking's startDate and endDate 
+        jsonBooking.startDate = new Date(jsonBooking.startDate).toISOString().split('T')[0];
+        jsonBooking.endDate = new Date(jsonBooking.endDate).toISOString().split('T')[0];
+
+
         // set number types for lat, lng, and price
         jsonBooking.Spot.lat = Number(jsonBooking.Spot.lat);
         jsonBooking.Spot.lng = Number(jsonBooking.Spot.lng);
