@@ -78,12 +78,11 @@ router.get('/current', requireAuth, async (req, res) => {
         jsonBooking.startDate = new Date(jsonBooking.startDate).toISOString().split('T')[0];
         jsonBooking.endDate = new Date(jsonBooking.endDate).toISOString().split('T')[0];
 
-
-        // set number types for lat, lng, and price
+        // Set number types for lat, lng, and price
         jsonBooking.Spot.lat = Number(jsonBooking.Spot.lat);
         jsonBooking.Spot.lng = Number(jsonBooking.Spot.lng);
         jsonBooking.Spot.price = Number(jsonBooking.Spot.price);
-        userBookings.push(jsonBooking)
+        userBookings.push(jsonBooking);
     });
 
     res.json({

@@ -569,8 +569,8 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
       bookings = bookings.map(booking => {
         return {
           spotId: booking.spotId,
-          startDate: booking.startDate,
-          endDate: booking.endDate
+          startDate: booking.startDate.toISOString().split('T')[0],
+          endDate: booking.endDate.toISOString().split('T')[0]
         };
       });
       res.json({ Bookings: bookings })
