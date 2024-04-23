@@ -23,19 +23,22 @@ const validateBookingDatesExist = [
 
 const validateBookingEdit = [
     check('startDate')
-        .optional()
         .isAfter(new Date().toString())
         .withMessage("startDate cannot be in the past"),
     check('endDate')
-        .optional()
+        .exists({ checkFalsey: true })
+        .notEmpty()
         .custom((value, { req }) => {
             if (new Date(value) <= new Date(req.body.startDate)) {
                 throw new Error('endDate cannot be on or before startDate')
             }
             return true
         }),
+    check('endDate')
+        .isAfter(new Date().toString())
+        .withMessage("endDate cannot be in the past"),
     handleValidationErrors
-];
+]
 // GET ALL OF THE CURRENT USER'S BOOKINGS
 // GET /api/bookings/current
 
@@ -93,17 +96,23 @@ router.get('/current', requireAuth, async (req, res) => {
 // EDIT A BOOKING
 // PUT /api/bookings/:bookingId
 
-router.put('/:bookingId', requireAuth, authorize, validateBookingDatesExist, validateBookingEdit, async (req, res, next) => {
+router.put('/:bookingId', requireAuth, validateBookingDatesExist, validateBookingEdit, async (req, res, next) => {
 
     const { bookingId } = req.params
 
+    // Error if booking can't be found
     let foundBooking = await Booking.findByPk(bookingId)
     if (!foundBooking) {
         return res.status(404).json({ message: "Booking couldn't be found" })
     }
 
+    // Error if modifying past booking
     if (foundBooking.toJSON().endDate <= new Date()) {
         return res.status(403).json({ message: "Past bookings can't be modified" })
+    }
+
+    if (foundBooking.userId !== req.user.id) {
+        return res.status(403).json("Current user is not authorized to edit this booking")
     }
 
     const spotId = foundBooking.spotId
@@ -113,8 +122,14 @@ router.put('/:bookingId', requireAuth, authorize, validateBookingDatesExist, val
     // declare startDates as date objects
     let { startDate, endDate } = req.body
 
-    startDate = new Date(startDate)
-    endDate = new Date(endDate)
+    // Format the start and endDate
+    startDate = new Date(startDate);
+    endDate = new Date(endDate);
+    // console.log(`This is the ${startDate}`)
+    startDate = startDate.toISOString().split('T')[0];
+    // console.log(`this is the new ${startDate}`)
+    endDate = endDate.toISOString().split('T')[0];
+    // console.log(`${endDate}`)
 
     const err = new Error("Sorry, this spot is already booked for the specified dates")
     err.status = 403
@@ -151,9 +166,23 @@ router.put('/:bookingId', requireAuth, authorize, validateBookingDatesExist, val
 
     if (Object.keys(err.errors).length) return next(err)
 
-    await foundBooking.update(req.body)
+    await foundBooking.update(req.body);
+    // console.log(req.body);
 
-    res.json(foundBooking)
+    // Format the response
+    const formattedBooking = {
+        id: foundBooking.id,
+        userId: foundBooking.userId,
+        spotId: foundBooking.spotId,
+        startDate: foundBooking.startDate.toISOString().split('T')[0],
+        endDate: foundBooking.endDate.toISOString().split('T')[0],
+        createdAt: foundBooking.createdAt,
+        updatedAt: foundBooking.updatedAt
+    };
+
+    res.json(formattedBooking);
+
+    // console.log(`${startDate} and ${endDate}`)
 })
 
 // DELETE A BOOKING

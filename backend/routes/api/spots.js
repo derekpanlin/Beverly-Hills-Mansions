@@ -626,7 +626,7 @@ router.post('/:spotId/bookings', requireAuth, validateBookingDatesExist, validat
   }
 
   if (userId === foundSpot.toJSON().ownerId) {
-    return res.status(403).json({ message: "Forbidden" })
+    return res.status(403).json({ message: "Forbidden: Spot must NOT belong to the current user" })
   };
 
   // Validate the dates and check for conflicts 
