@@ -563,7 +563,22 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     // If current user is owner, include user details in body
     if (req.user.id === spot.ownerId) {
-      res.json({ Bookings: bookings });
+      res.json({
+        Bookings: bookings.map(booking => ({
+          User: {
+            id: booking.User.id,
+            firstName: booking.User.firstName,
+            lastName: booking.User.lastName
+          },
+          id: booking.id,
+          spotId: booking.spotId,
+          userId: booking.userId,
+          startDate: booking.startDate.toISOString().split('T')[0],
+          endDate: booking.endDate.toISOString().split('T')[0],
+          createdAt: booking.createdAt,
+          updatedAt: booking.updatedAt,
+        }))
+      });
     } else {
       // If current user isn't owner, just show the bookings
       bookings = bookings.map(booking => {
