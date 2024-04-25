@@ -24,6 +24,24 @@ const handleValidationErrors = (req, _res, next) => {
     next();
 };
 
+const handleValidationErrors403 = (req, _res, next) => {
+    const validationErrors = validationResult(req);
+
+    if (!validationErrors.isEmpty()) {
+        const errors = {};
+        validationErrors
+            .array()
+            .forEach(error => errors[error.path] = error.msg);
+
+        const err = Error("Bad request.");
+        err.errors = errors;
+        err.status = 403;
+        err.title = "Bad request.";
+        next(err);
+    }
+    next();
+};
+
 // Custom validation for startDate
 const validateStartDate = check('startDate')
     .custom(async (value, { req }) => {
@@ -98,6 +116,7 @@ const validateEndDate = check('endDate')
 
 module.exports = {
     handleValidationErrors,
+    handleValidationErrors403,
     validateStartDate,
     validateEndDate
 };
