@@ -16,6 +16,13 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
     const reviewImage = await ReviewImage.findByPk(imageId);
 
 
+    // Check if review image exists
+    if (!reviewImage) {
+        return res.status(404).json({
+            message: "Review Image couldn't be found"
+        })
+    };
+
     // Check that review belongs to the current user
     const review = await Review.findByPk(reviewImage.reviewId);
     if (review.userId !== req.user.id) {
@@ -23,12 +30,6 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
             message: "Unauthorized: Review doesn't belong to current user"
         })
     }
-    // Check if review image exists
-    if (!reviewImage) {
-        return res.status(404).json({
-            message: "Review Image couldn't be found"
-        })
-    };
 
     await reviewImage.destroy();
 
