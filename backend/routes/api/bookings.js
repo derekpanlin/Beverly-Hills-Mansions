@@ -234,7 +234,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
     }
     await booking.destroy();
     res.status(200).json({
-        message: 'Successful deletion',
+        message: 'Successfully deleted',
     });
 });
 
