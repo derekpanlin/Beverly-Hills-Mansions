@@ -119,8 +119,6 @@ router.put('/:bookingId', requireAuth, validateBookingDatesExist, validateBookin
 
     const spotId = foundBooking.spotId
 
-    // let bookings = await Booking.findAll({ where: { spotId: spotId } })
-
     // Extract startDate and endDate from req body
     let { startDate, endDate } = req.body
 
@@ -135,46 +133,6 @@ router.put('/:bookingId', requireAuth, validateBookingDatesExist, validateBookin
             id: { [Op.not]: bookingId }
         }
     });
-
-
-    // console.log(`THIS IS ${existingBookings[0]}`)
-
-    // let conflictErrors = {};
-
-    // for (const booking of existingBookings) {
-    //     console.log(booking.toJSON())
-    //     const bookingStartDate = new Date(booking.startDate);
-    //     const bookingEndDate = new Date(booking.endDate);
-
-    //     // Format the dates as strings in "YYYY-MM-DD" format
-    //     const bookingStartDateString = bookingStartDate.toISOString().split('T')[0];
-    //     const bookingEndDateString = bookingEndDate.toISOString().split('T')[0];
-    //     const startDateString = startDate.toISOString().split('T')[0];
-    //     const endDateString = endDate.toISOString().split('T')[0];
-
-    //     // Check for conflicts with existing bookings
-    //     // Check for conflicts with existing bookings
-    // console.log(`This is the req body startDate: ${startDateString} and booking StartDate ${bookingStartDateString}`);
-    // console.log(`This is the req body endDate: ${endDateString} and booking endDate ${bookingEndDateString}`);
-    //     if (startDateString >= bookingStartDateString && startDateString <= bookingEndDateString) {
-    //         conflictErrors.startDate = "Start date conflicts with an existing booking";
-    //     }
-    //     if (endDateString >= bookingStartDateString && endDateString <= bookingEndDateString) {
-    //         conflictErrors.endDate = "End date conflicts with an existing booking";
-    //     }
-    //     if (startDateString <= bookingStartDateString && endDateString >= bookingEndDateString) {
-    //         conflictErrors.startDate = "Start date conflicts with an existing booking";
-    //         conflictErrors.endDate = "End date conflicts with an existing booking";
-    //     }
-    // };
-
-    // if (Object.keys(conflictErrors).length > 0) {
-    //     return res.status(403).json({
-    //         message: "Sorry, this spot is already booked for the specified dates",
-    //         errors: conflictErrors
-    //     });
-    // };
-
 
     for (const booking of existingBookings) {
         console.log(booking.toJSON())

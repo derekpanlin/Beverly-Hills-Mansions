@@ -59,7 +59,44 @@ const validateReview = [
 
 
 const validateQuery = [
+  check('page')
+    .isInt({ min: 1, max: 10 })
+    .withMessage('Page must be an integer between 1 and 10')
+    .toInt()
+    .default(1),
 
+  check('size')
+    .isInt({ min: 1, max: 20 })
+    .withMessage('Size must be an integer between 1 and 20')
+    .toInt()
+    .default(20),
+
+  check('minLat')
+    .optional()
+    .isDecimal()
+    .withMessage('Minimum latitude must be a valid decimal number'),
+  check('maxLat')
+    .optional()
+    .isDecimal()
+    .withMessage('Maximum latitude must be a valid decimal number'),
+
+  check('minLng')
+    .optional()
+    .isDecimal()
+    .withMessage('Minimum longitude must be a valid decimal number'),
+  check('maxLng')
+    .optional()
+    .isDecimal()
+    .withMessage('Maximum longitude must be a valid decimal number'),
+
+  check('minPrice')
+    .optional()
+    .isDecimal({ min: 0 })
+    .withMessage('Minimum price must be a decimal greater than or equal to 0'),
+  check('maxPrice')
+    .optional()
+    .isDecimal({ min: 0 })
+    .withMessage('Maximum price must be a decimal greater than or equal to 0')
 ]
 
 // GET All spots --> /api/spots
@@ -69,8 +106,15 @@ router.get('/', async (req, res, next) => {
 
   // Parse query parameters and build a filter object
   const filter = {};
+
   if (minLat !== undefined && maxLat !== undefined) {
     filter.lat = { [Op.between]: [parseFloat(minLat), parseFloat(maxLat)] };
+  }
+  if (minLng !== undefined && maxLng !== undefined) {
+    filter.lng = { [Op.between]: [parseFloat(minLng), parseFloat(maxLng)] };
+  }
+  if (minPrice !== undefined && maxPrice !== undefined) {
+    filter.price = { [Op.between]: [parseFloat(minPrice), parseFloat(maxPrice)] };
   }
 
   // Fetch all spots from db
@@ -90,6 +134,7 @@ router.get('/', async (req, res, next) => {
       'createdAt',
       'updatedAt'
     ],
+    where: filter,
     include: [
       {
         model: Review,
@@ -102,7 +147,9 @@ router.get('/', async (req, res, next) => {
         attributes: ['url'],
         required: false
       }
-    ]
+    ],
+    limit: size,
+    offset: (page - 1) * size
   });
 
   // Calculate average rating for each spot
@@ -129,7 +176,7 @@ router.get('/', async (req, res, next) => {
     };
   });
 
-  res.status(200).json({ Spots: formattedSpots });
+  res.status(200).json({ Spots: formattedSpots, page: parseInt(page), size: parseInt(size) });
 
 });
 
