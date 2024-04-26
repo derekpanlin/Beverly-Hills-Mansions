@@ -62,10 +62,12 @@ const validateReview = [
 
 const validateQuery = [
   check('page')
+    .optional()
     .isInt({ min: 1, max: 10 })
     .withMessage('Page must be an integer between 1 and 10'),
 
   check('size')
+    .optional()
     .isInt({ min: 1, max: 20 })
     .withMessage('Size must be an integer between 1 and 20'),
 
