@@ -101,9 +101,12 @@ const validateQuery = [
 
 // GET All spots --> /api/spots
 
-router.get('/', async (req, res, next) => {
-  const { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+router.get('/', validateQuery, async (req, res, _next) => {
+  const { minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+  let { page, size } = req.query;
 
+  page = parseInt(page) || 1;
+  size = parseInt(size) || 20;
   // Parse query parameters and build a filter object
   const filter = {};
 
