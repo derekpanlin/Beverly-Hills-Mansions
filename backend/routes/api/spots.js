@@ -47,6 +47,7 @@ const validateSpot = [
     .notEmpty()
     .isInt({ min: 1 })
     .withMessage("Price per day must be a positive number"),
+
   handleValidationErrors,
 ];
 
@@ -54,6 +55,7 @@ const validateSpot = [
 const validateReview = [
   check('review').notEmpty().withMessage('Review text is required'),
   check('stars').isInt({ min: 1, max: 5 }).withMessage('Stars must be an integer from 1 to 5'),
+
   handleValidationErrors,
 ];
 
@@ -61,13 +63,11 @@ const validateReview = [
 const validateQuery = [
   check('page')
     .isInt({ min: 1, max: 10 })
-    .withMessage('Page must be an integer between 1 and 10')
-    .toInt(),
+    .withMessage('Page must be an integer between 1 and 10'),
 
   check('size')
     .isInt({ min: 1, max: 20 })
-    .withMessage('Size must be an integer between 1 and 20')
-    .toInt(),
+    .withMessage('Size must be an integer between 1 and 20'),
 
   check('minLat')
     .optional()
@@ -95,6 +95,7 @@ const validateQuery = [
     .optional()
     .isDecimal({ min: 0 })
     .withMessage('Maximum price must be a decimal greater than or equal to 0'),
+
   handleValidationErrors
 ]
 
