@@ -96,7 +96,8 @@ const validateQuery = [
   check('maxPrice')
     .optional()
     .isDecimal({ min: 0 })
-    .withMessage('Maximum price must be a decimal greater than or equal to 0')
+    .withMessage('Maximum price must be a decimal greater than or equal to 0'),
+  handleValidationErrors
 ]
 
 // GET All spots --> /api/spots
@@ -105,10 +106,15 @@ router.get('/', validateQuery, async (req, res, _next) => {
   const { minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
   let { page, size } = req.query;
 
+  console.log(minLat, maxLat, minLng, maxLng, minPrice, maxPrice);
+
+
   page = parseInt(page) || 1;
   size = parseInt(size) || 20;
+  console.log(page, size);
   // Parse query parameters and build a filter object
   const filter = {};
+
 
   if (minLat !== undefined && maxLat !== undefined) {
     filter.lat = { [Op.between]: [parseFloat(minLat), parseFloat(maxLat)] };
