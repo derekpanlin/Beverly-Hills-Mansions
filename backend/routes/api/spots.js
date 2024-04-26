@@ -232,9 +232,9 @@ router.get('/:spotId', async (req, res, next) => {
     });
 
     if (!spot) {
-      const error = new Error("Spot couldn't be found");
-      error.status = 404;
-      throw error;
+      return res.status(404).json({
+        message: "Spot couldn't be found"
+      });
     }
 
     // calculate average star rating
