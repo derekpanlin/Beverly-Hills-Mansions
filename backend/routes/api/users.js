@@ -30,11 +30,11 @@ const validateSignup = [
     check('firstName')
         .exists({ checkFalsy: true })
         .isLength({ min: 1 })
-        .withMessage('First Name is required.'),
+        .withMessage('First name is required.'),
     check('lastName')
         .exists({ checkFalsy: true })
         .isLength({ min: 1 })
-        .withMessage('Last Name is required.'),
+        .withMessage('Last name is required.'),
     handleValidationErrors
 ];
 

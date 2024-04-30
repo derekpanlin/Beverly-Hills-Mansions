@@ -46,7 +46,7 @@ const validateSpot = [
     .exists({ checkFalsy: true })
     .notEmpty()
     .isInt({ min: 1 })
-    .withMessage("Price per day must be a positive number"),
+    .withMessage("Price per day must be a positive number greater than 1"),
 
   handleValidationErrors,
 ];
