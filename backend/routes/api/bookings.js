@@ -77,7 +77,7 @@ router.get('/current', requireAuth, async (req, res) => {
         delete jsonBooking.Spot.createdAt
         delete jsonBooking.Spot.updatedAt
 
-        // Format the jsonBooking's startDate and endDate 
+        // Format the jsonBooking's startDate and endDate
         jsonBooking.startDate = new Date(jsonBooking.startDate).toISOString().split('T')[0];
         jsonBooking.endDate = new Date(jsonBooking.endDate).toISOString().split('T')[0];
 
@@ -165,7 +165,7 @@ router.put('/:bookingId', requireAuth, validateBookingDatesExist, validateBookin
                     endDate: "End date conflicts with an existing booking"
                 }
             });
-            // Conflict with both startDate and endDate surrounding 
+            // Conflict with both startDate and endDate surrounding
         }
         if ((startDateString <= bookingStartDateString && endDateString >= bookingEndDateString) || (startDateString >= bookingStartDateString && endDateString <= bookingEndDateString)) {
             return res.status(403).json({
