@@ -118,4 +118,4 @@ const requireAuth = function (req, _res, next) {
 //     return next(err);
 // }
 
-module.exports = { setTokenCookie, restoreUser, requireAuth, authorize };
+module.exports = { setTokenCookie, restoreUser, requireAuth };
