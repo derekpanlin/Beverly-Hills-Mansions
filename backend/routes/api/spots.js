@@ -4,8 +4,8 @@ const { Sequelize, Op } = require('sequelize');
 
 const { Spot, SpotImage, User, Review, ReviewImage, Booking } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth')
-const { handleValidationErrors, validateStartDate, validateEndDate } = require('../../utils/validation')
-const { check, validationResult } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation')
+const { check } = require('express-validator');
 
 const validateSpot = [
   check("address")
