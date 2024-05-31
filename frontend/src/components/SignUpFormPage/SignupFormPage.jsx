@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import * as sessionActions from '../../store/session';
+import './SignupForm.css'
 
 
 function SignupFormPage() {
@@ -44,7 +45,7 @@ function SignupFormPage() {
     };
 
     return (
-        <>
+        <div className="signup-form">
             <h1>Sign Up</h1>
             <form onSubmit={handleSubmit}>
                 <label>
@@ -109,7 +110,7 @@ function SignupFormPage() {
                 {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
                 <button type="submit">Sign Up</button>
             </form>
-        </>
+        </div>
     );
 }
 

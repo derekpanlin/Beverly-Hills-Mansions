@@ -25,31 +25,34 @@ function LoginFormPage() {
     };
 
     return (
-        <>
-            <h1>Log In</h1>
-            <form onSubmit={handleSubmit} className="login-form">
-                <label>
-                    Username or Email
-                    <input
-                        type="text"
-                        value={credential}
-                        onChange={(e) => setCredential(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Password
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </label>
-                {errors.credential && <p className="error">{errors.credential}</p>}
-                <button type="submit">Log In</button>
-            </form>
-        </>
+        <div className="login-form-container">
+            <div className="roof"></div>
+            <div className="login-form">
+                <h1>Log In</h1>
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        Username or Email
+                        <input
+                            type="text"
+                            value={credential}
+                            onChange={(e) => setCredential(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Password
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </label>
+                    {errors.credential && <p className="error">{errors.credential}</p>}
+                    <button type="submit">Log In</button>
+                </form>
+            </div>
+        </div>
     );
 }
 
