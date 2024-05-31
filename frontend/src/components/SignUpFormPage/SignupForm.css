@@ -1,4 +1,5 @@
 /* SignupForm.css */
+
 body {
     font-family: Arial, sans-serif;
 }
@@ -17,43 +18,54 @@ body {
     border-left: 168px solid transparent;
     border-right: 168px solid transparent;
     border-bottom: 140px solid #33a1d8;
-    position: relative
+    position: relative;
 }
 
 .signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-width: 400px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 75px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .signup-form h1 {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .signup-form label {
-    display: block;
-    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .signup-form input {
-    width: 85%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .signup-form button {
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     background-color: #007bff;
     color: white;
     font-size: 16px;
     cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .signup-form button:hover {
@@ -62,4 +74,9 @@ body {
 
 .signup-form p {
     color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
 }
