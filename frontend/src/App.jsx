@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import LoginFormPage from './components/LoginFormPage/LoginFormPage';
 import * as sessionActions from './store/session';
+import SignupFormPage from './components/SignUpFormPage/SignupFormPage';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <LoginFormPage />
+      },
+      {
+        path: '/signup',
+        element: <SignupFormPage />
       }
     ]
   }
