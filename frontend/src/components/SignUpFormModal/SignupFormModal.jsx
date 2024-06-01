@@ -1,28 +1,26 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useModal } from '../../context/Modal';
 import * as sessionActions from '../../store/session';
-import './SignupForm.css'
+import './SignupForm.css';
 
 
-function SignupFormPage() {
+function SignupFormModal() {
     const dispatch = useDispatch();
-    const sessionUser = useSelector((state) => state.session.user);
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState({});
+    const { closeModal } = useModal();
 
-    if (sessionUser) return <Navigate to="/" replace={true} />;
 
     // Handle Submit
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
-            // set errors to empty 
             setErrors({});
             return dispatch(
                 sessionActions.signup({
@@ -32,15 +30,17 @@ function SignupFormPage() {
                     lastName,
                     password
                 })
-            ).catch(async (res) => {
-                const data = await res.json();
-                if (data?.errors) {
-                    setErrors(data.errors);
-                }
-            });
+            )
+                .then(closeModal)
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data?.errors) {
+                        setErrors(data.errors);
+                    }
+                });
         }
         return setErrors({
-            confirmPassword: "Confirmed password must match the password field"
+            confirmPassword: "Confirm Password field must be the same as the Password field"
         });
     };
 
@@ -117,4 +117,4 @@ function SignupFormPage() {
     );
 }
 
-export default SignupFormPage;
+export default SignupFormModal;
