@@ -1,0 +1,46 @@
+/* frontend/src/components/ProfileButton/ProfileButton.css */
+
+.profile-button-container {
+    position: relative
+}
+
+.hidden {
+    display: none;
+}
+
+.profile-dropdown {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    top: 50px;
+    left: 0;
+    /* adjust this value to position correctly below the button */
+}
+
+.profile-dropdown li {
+    margin-bottom: 10px;
+}
+
+
+
+.profile-dropdown button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-dropdown button:hover {
+    background-color: #0056b3;
+}
+
+.profile-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
