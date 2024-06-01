@@ -15,15 +15,14 @@
     list-style: none;
     padding: 10px;
     margin: 0;
-    top: 50px;
+    /* top: 50px; */
     left: 0;
     /* adjust this value to position correctly below the button */
 }
 
 .profile-dropdown li {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
-
 
 
 .profile-dropdown button {
