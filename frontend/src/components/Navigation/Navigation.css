@@ -1,7 +1,62 @@
 /* frontend/src/components/ProfileButton/ProfileButton.css */
 
+/* Navigation.css */
+
+/* Nav bar wasnt touching left side of HTMl, so reset the margins */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3e6183;
+    background: linear-gradient(90deg, #3e6183, #0056b3);
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list li {
+    margin-right: 20px;
+}
+
+.nav-list li a {
+    text-decoration: none;
+    color: #eaeef3;
+    font-size: 18px;
+}
+
+.nav-list li a:hover {
+    color: #84afdd;
+}
+
 .profile-button-container {
+    display: flex;
+    align-items: center;
     position: relative
+}
+
+/* ProfileButton.css */
+
+.profile-button-container {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
 }
 
 .hidden {
@@ -9,37 +64,35 @@
 }
 
 .profile-dropdown {
+    cursor: pointer;
     position: absolute;
+    right: 0;
+    top: 40px;
+    /* Adjust based on your button size */
     background-color: white;
     border: 1px solid #ccc;
     list-style: none;
-    padding: 10px;
-    margin: 0;
-    /* top: 50px; */
-    left: 0;
-    /* adjust this value to position correctly below the button */
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
 }
+
 
 .profile-dropdown li {
     margin-bottom: 20px;
 }
 
-
 .profile-dropdown button {
-    background-color: #007bff;
+    background: #5892cd;
     color: white;
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
-    cursor: pointer;
 }
 
 .profile-dropdown button:hover {
-    background-color: #0056b3;
-}
-
-.profile-button {
-    background: none;
-    border: none;
     cursor: pointer;
+    color: #1f3f62;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
