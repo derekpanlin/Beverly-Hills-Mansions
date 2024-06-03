@@ -20,6 +20,7 @@ body {
     position: fixed;
     width: 100%;
     top: 0;
+    box-sizing: border-box;
 }
 
 .nav-list {
@@ -52,11 +53,15 @@ body {
 /* ProfileButton.css */
 
 .profile-button-container {
-    cursor: pointer;
     position: relative;
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 0;
+}
+
+.profile-button-container button:hover {
+    cursor: pointer;
+
 }
 
 .hidden {
@@ -64,15 +69,13 @@ body {
 }
 
 .profile-dropdown {
-    cursor: pointer;
     position: absolute;
     right: 0;
     top: 40px;
-    /* Adjust based on your button size */
     background-color: white;
     border: 1px solid #ccc;
     list-style: none;
-    padding: 30px;
+    padding: 25px;
     margin-top: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1;
