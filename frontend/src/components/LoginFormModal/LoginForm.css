@@ -2,6 +2,11 @@
 
 body {
     font-family: Arial, sans-serif;
+
+}
+
+button:disabled {
+    color: red;
 }
 
 .login-form-container {
@@ -50,6 +55,7 @@ body {
     box-sizing: border-box;
 }
 
+
 .login-form button {
     padding: 10px 2px;
     border: none;
@@ -60,6 +66,10 @@ body {
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
+}
+
+.login-form button:disabled {
+    cursor: not-allowed;
 }
 
 .login-form button:hover {
