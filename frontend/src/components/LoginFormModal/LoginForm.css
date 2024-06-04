@@ -72,13 +72,14 @@ button:disabled {
     cursor: not-allowed;
 }
 
-.login-form button:hover {
+.login-form button:not(:disabled):hover {
     background-color: #0056b3;
+    /* Apply hover effect only when button is not disabled */
 }
 
 .login-form .error {
     color: red;
-    font-size: 14px;
+    font-size: 12px;
     margin-top: -10px;
     margin-bottom: 20px;
     width: 100%;
