@@ -1,3 +1,3 @@
-import Spots from "./Spots";
+import SpotsIndex from "./Spots";
 
-export default Spots;
+export default SpotsIndex;

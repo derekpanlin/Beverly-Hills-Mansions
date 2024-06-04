@@ -4,9 +4,10 @@ import { csrfFetch } from "./csrf";
 const GET_SPOTS = "spots/getSpots";
 
 // Action Creator
-const getSpot = () => {
+const getSpot = (spots) => {
     return {
         type: GET_SPOTS,
+        spots
     }
 };
 
@@ -16,7 +17,7 @@ export const getSpots = () => async (dispatch) => {
 
     if (res.ok) {
         const data = await res.json();
-        dispatch(getSpot(data));
+        dispatch(getSpot(data.Spots));
     }
 }
 
@@ -26,7 +27,11 @@ const initialState = {};
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_SPOTS:
-            return { ...state }
+            const newState = {};
+            action.spots.forEach(spot => {
+                newState[spot.id] = spot;
+            });
+            return newState;
         default: {
             return state;
         }
