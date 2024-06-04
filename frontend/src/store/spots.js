@@ -27,8 +27,9 @@ const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_SPOTS:
             return { ...state }
-        default:
+        default: {
             return state;
+        }
     }
 }
 

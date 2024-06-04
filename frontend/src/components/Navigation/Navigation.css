@@ -17,7 +17,7 @@ body {
     background: linear-gradient(90deg, #3e6183, #0056b3);
     padding: 10px 20px;
     border-bottom: 1px solid #ccc;
-    position: fixed;
+    position: static;
     width: 100%;
     top: 0;
     box-sizing: border-box;
