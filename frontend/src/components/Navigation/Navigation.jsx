@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+import { CiHome } from "react-icons/ci";
 import './Navigation.css';
 
 
@@ -11,7 +12,7 @@ function Navigation({ isLoaded }) {
         <nav className="nav-bar">
             <ul className="nav-list">
                 <li>
-                    <NavLink to="/">Home</NavLink>
+                    <NavLink to="/"><CiHome className="home-icon" size={30} /></NavLink>
                 </li>
             </ul>
             {isLoaded && (

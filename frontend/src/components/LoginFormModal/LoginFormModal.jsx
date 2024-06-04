@@ -23,6 +23,9 @@ function LoginFormModal() {
                 }
             });
     };
+
+    const disableButton = credential.length < 4 || password.length < 6;
+
     return (
         <div className="login-form-container">
             <div className="login-roof"></div>
@@ -48,7 +51,7 @@ function LoginFormModal() {
                         />
                     </label>
                     {errors.credential && <p className="error">{errors.credential}</p>}
-                    <button type="submit">Log In</button>
+                    <button type="submit" disabled={disableButton}>Log In</button>
                 </form>
             </div>
         </div>
