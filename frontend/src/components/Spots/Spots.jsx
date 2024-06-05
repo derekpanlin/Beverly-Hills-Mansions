@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { getSpots } from '../../store/spots';
 import "./Spots.css";
 
-const SpotsIndex = () => {
-    const spots = useSelector(state => Object.values(state.spots));
+const Spots = () => {
+    const spots = useSelector(state => Object.values(state.spots.allSpots));
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -25,9 +25,8 @@ const SpotsIndex = () => {
                             <h3 className='spot-name'>{spot.name}</h3>
                             <div className='spot-location-rating'>
                                 <div className='spot-location'>{spot.city}, {spot.state}</div>
-                                <div className='spot-rating'>⭐ {spot.avgRating} </div>
+                                <div className='spot-rating'>★ {spot.avgRating} </div>
                             </div>
-
                             <div className="spot-price">${spot.price} / night</div>
                         </div>
                     </div>
@@ -38,4 +37,4 @@ const SpotsIndex = () => {
 }
 
 
-export default SpotsIndex;
+export default Spots;

@@ -22,20 +22,24 @@ export const getSpots = () => async (dispatch) => {
 }
 
 // Reducer
-const initialState = {};
+const initialState = { allSpots: {}, currentSpot: {} };
 
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_SPOTS:
-            const newState = {};
+        case GET_SPOTS: {
+            const normalizedSpots = {};
             action.spots.forEach(spot => {
-                newState[spot.id] = spot;
+                normalizedSpots[spot.id] = spot;
             });
-            return newState;
+            return {
+                ...state,
+                allSpots: normalizedSpots
+            };
+        }
         default: {
             return state;
         }
     }
-}
+};
 
 export default spotsReducer;
