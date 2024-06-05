@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getSpots } from '../../store/spots';
+import "./Spots.css";
 
 const SpotsIndex = () => {
     const spots = useSelector(state => Object.values(state.spots));
@@ -12,13 +13,23 @@ const SpotsIndex = () => {
 
 
     return (
-        <div>
+        <div className='spots-container'>
             <h1>Spots</h1>
-            <ul>
+            <div className='spots-grid'>
                 {spots.map(spot => (
-                    <li key={spot.id}>{spot.name}</li>
+                    <div key={spot.id} className='spot-tile'>
+                        <div className='spot-image'>
+                            <img src={spot.previewImage} />
+                        </div>
+                        <div className='spot-details'>
+                            <div className='spot-name'>{spot.name}</div>
+                            <div className='spot-location'>{spot.city}, {spot.state}</div>
+                            <div className='spot-rating'>⭐ {spot.avgRating} </div>
+                            <div className="spot-price">${spot.price} / night</div>
+                        </div>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }
