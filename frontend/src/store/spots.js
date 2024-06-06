@@ -3,6 +3,8 @@ import { csrfFetch } from "./csrf";
 // Action Types
 const GET_SPOTS = "spots/getSpots";
 
+const GET_SPOT_DETAILS = "spots/getSpotDetails"
+
 // Action Creator
 const getSpot = (spots) => {
     return {
@@ -10,6 +12,13 @@ const getSpot = (spots) => {
         spots
     }
 };
+
+const getSpotDetails = (spot) => {
+    return {
+        type: GET_SPOT_DETAILS,
+        spot
+    }
+}
 
 // Thunk Action Creator
 export const getSpots = () => async (dispatch) => {
