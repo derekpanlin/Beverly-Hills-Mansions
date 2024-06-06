@@ -11,7 +11,6 @@ const Spots = () => {
         dispatch(getSpots());
     }, [dispatch])
 
-
     return (
         <div className='spots-container'>
             <h1>Spots</h1>
@@ -19,13 +18,13 @@ const Spots = () => {
                 {spots.map(spot => (
                     <div key={spot.id} className='spot-tile'>
                         <div className='spot-image'>
-                            <img src={spot.previewImage} />
+                            <img src={spot.previewImage} alt={spot.name} />
                         </div>
                         <div className='spot-details'>
-                            <h3 className='spot-name'>{spot.name}</h3>
+                            <div className='tooltip'>{spot.name}</div>
                             <div className='spot-location-rating'>
                                 <div className='spot-location'>{spot.city}, {spot.state}</div>
-                                <div className='spot-rating'>★ {spot.avgRating} </div>
+                                <div className='spot-rating'>★ {spot.avgRating || "New"} </div>
                             </div>
                             <div className="spot-price">${spot.price} / night</div>
                         </div>
@@ -35,6 +34,5 @@ const Spots = () => {
         </div>
     );
 }
-
 
 export default Spots;

@@ -50,8 +50,9 @@ function ProfileButton({ user }) {
             <ul className={profileDropdownClass} ref={ulRef}>
                 {user ? (
                     <>
-                        <li>{user.username}</li>
-                        <li>{user.firstName} {user.lastName}</li>
+                        {/* <li>{user.username}</li> */}
+                        <li>Hello, {user.firstName}</li>
+                        <li>"Link to manage Spots Page"</li>
                         <li>{user.email}</li>
                         <li>
                             <button onClick={logout}>Log Out</button>

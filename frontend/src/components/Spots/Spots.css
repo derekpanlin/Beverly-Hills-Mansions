@@ -4,17 +4,20 @@
 
 .spots-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     margin: 0 auto;
     gap: 40px;
-    max-width: 1400px;
+    max-width: 1200px;
 }
 
 .spot-tile {
+    position: relative;
+    /* Add this for positioning the tooltip */
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 .spot-image img {
@@ -24,9 +27,9 @@
 }
 
 .spot-details {
+    position: relative;
     padding: 10px;
 }
-
 
 .spot-name,
 .spot-location,
@@ -38,4 +41,28 @@
 .spot-location-rating {
     display: flex;
     justify-content: space-between;
+}
+
+.tooltip {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.3s;
+    width: max-content;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.spot-tile:hover .tooltip {
+    visibility: visible;
+    opacity: .7;
 }
