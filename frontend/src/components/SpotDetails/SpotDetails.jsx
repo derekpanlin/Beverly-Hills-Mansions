@@ -16,6 +16,13 @@ function SpotDetails() {
         dispatch(getSpotDetails(spotId));
     }, [dispatch, spotId])
 
+    if (!spotDetails || !spotDetails.SpotImages) {
+        return null;
+    }
+
+    const mainImage = spotDetails.SpotImages.find(image => image.preview);
+    const otherImages = spotDetails.SpotImages.filter(image => !image.preview);
+
     return (
         <div className='spot-details-container'>
             <div className='spot-header'>
@@ -23,10 +30,15 @@ function SpotDetails() {
                 <h3>{spotDetails.city}, {spotDetails.state}, {spotDetails.country}</h3>
             </div>
             <div className='spot-images-container'>
-                <div className='main-image'>
-                    <img src={spotDetails.SpotImages[0].url} />
+                {mainImage && <img className='main-image' src={mainImage.url} />}
+                <div className='small-images'>
+                    {otherImages.slice(0, 4).map(image => (
+                        <img key={image.id} src={image.url} />
+                    ))}
                 </div>
-
+            </div>
+            <div className='spot-description'>
+                
             </div>
         </div>
     );

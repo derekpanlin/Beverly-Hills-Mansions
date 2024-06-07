@@ -21,6 +21,26 @@ module.exports = {
         spotId: 1
       },
       {
+        url: 'https://photos.zillowstatic.com/fp/82301e326be29826c46649b6bec3f671-uncropped_scaled_within_1536_1152.webp',
+        preview: false,
+        spotId: 1
+      },
+      {
+        url: 'https://photos.zillowstatic.com/fp/1b098c15b5fdc5a7eff1cdeeea13985c-uncropped_scaled_within_1536_1152.webp',
+        preview: false,
+        spotId: 1
+      },
+      {
+        url: 'https://photos.zillowstatic.com/fp/ee7fbf74a9e320112e6708b2ad58c1b4-cc_ft_1536.webp',
+        preview: false,
+        spotId: 1
+      },
+      {
+        url: 'https://photos.zillowstatic.com/fp/dddb92ad49aeb2e21727c916f99b79c5-cc_ft_1536.webp',
+        preview: false,
+        spotId: 1
+      },
+      {
         url: 'https://images.mansionglobal.com/im-01364509',
         preview: true,
         spotId: 2
