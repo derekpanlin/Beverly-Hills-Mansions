@@ -1,0 +1,92 @@
+/* frontend/src/components/LoginFormPage/LoginForm.css */
+
+body {
+    font-family: Arial, sans-serif;
+
+}
+
+button:disabled {
+    color: red;
+}
+
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    position: relative;
+}
+
+.login-roof {
+    width: 0;
+    height: 0;
+    border-left: 115px solid transparent;
+    border-right: 115px solid transparent;
+    border-bottom: 100px solid #33a1d8;
+    position: relative
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 400px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-form label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.login-form input {
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.login-form button {
+    padding: 10px 2px;
+    border: none;
+    border-radius: 50px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.login-form button:disabled {
+    cursor: not-allowed;
+}
+
+.login-form button:not(:disabled):hover {
+    background-color: #0056b3;
+    /* Apply hover effect only when button is not disabled */
+}
+
+.login-form .error {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
