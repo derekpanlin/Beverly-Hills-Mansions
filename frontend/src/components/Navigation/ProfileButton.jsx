@@ -52,7 +52,7 @@ function ProfileButton({ user }) {
                     <>
                         {/* <li>{user.username}</li> */}
                         <li>Hello, {user.firstName}</li>
-                        <li>"Link to manage Spots Page"</li>
+                        <li>Link to manage Spots Page</li>
                         <li>{user.email}</li>
                         <li>
                             <button onClick={logout}>Log Out</button>
