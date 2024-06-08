@@ -5,6 +5,8 @@ const GET_SPOTS = "spots/getSpots";
 
 const GET_SPOT_DETAILS = "spots/getSpotDetails"
 
+const CREATE_SPOT = "spots/createSpot"
+
 // Action Creator
 const getSpot = (spots) => {
     return {
@@ -17,6 +19,13 @@ const getSpotDetailsAction = (spotDetail) => {
     return {
         type: GET_SPOT_DETAILS,
         spotDetail
+    }
+}
+
+const createSpot = (newSpot) => {
+    return {
+        type: CREATE_SPOT,
+        newSpot
     }
 }
 
@@ -36,6 +45,24 @@ export const getSpotDetails = (spotId) => async (dispatch) => {
     if (res.ok) {
         const data = await res.json();
         dispatch(getSpotDetailsAction(data));
+    }
+}
+
+export const createNewSpot = (newSpot) => async (dispatch) => {
+    const res = await csrfFetch('/api/spots', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newSpot)
+    });
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(createSpot(data));
+        return data;
+    } else {
+        console.error('Failed to create new spot.')
     }
 }
 
@@ -59,6 +86,16 @@ const spotsReducer = (state = initialState, action) => {
                 ...state,
                 currentSpot: { ...action.spotDetail }
             };
+        }
+        case CREATE_SPOT: {
+            const newState = {
+                ...state,
+                allSpots: {
+                    ...state.allSpots,
+                    [action.newSpot.id]: action.newSpot
+                }
+            };
+            return newState;
         }
         default: {
             return state;
