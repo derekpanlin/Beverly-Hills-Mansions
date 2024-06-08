@@ -2,9 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSpotDetails } from '../../store/spots';
-
-
 import './SpotDetails.css';
+import Reviews from '../Reviews/Reviews';
 
 
 function SpotDetails() {
@@ -57,6 +56,7 @@ function SpotDetails() {
                     ★ {spotDetails.avgStarRating || "New"} ·
                     {spotDetails.numReviews > 0 && ` ${spotDetails.numReviews} reviews`}
                 </h2>
+                < Reviews spotId={spotId} />
             </div>
         </div>
     );

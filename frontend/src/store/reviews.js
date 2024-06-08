@@ -40,15 +40,17 @@ const reviewsReducer = (state = initialState, action) => {
         case GET_REVIEWS: {
             const newState = { ...state }
             action.reviews.forEach(review => {
-                newState[review.id] = review;
+                newState.reviews[review.id] = review;
             });
             return newState;
         };
         case CLEAR_REVIEWS: {
-            return { review: {} };
+            return initialState;
         }
         default: {
             return state;
         }
     }
 }
+
+export default reviewsReducer;
