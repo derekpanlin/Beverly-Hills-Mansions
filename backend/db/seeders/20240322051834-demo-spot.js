@@ -58,8 +58,8 @@ module.exports = {
         country: 'USA',
         lat: 37.96235,
         lng: 50.26534,
-        name: 'Casino Mogul Steve Wynn Mansion',
-        description: 'Mansion owned by world renowned casino mogul Steve Wynn. The sprawling 27,150-square-foot estate was originally built by Guess cofounder Maurice Marciano in the early 1990s.',
+        name: 'Japanese Inspired Home With Scintillating Views',
+        description: 'Welcome to L.A.! Nestled above the Sunset Strip behind a gated driveway, this romantically private contemporary Japanese-style house boasts unparalleled panoramic views from downtown to the ocean. At the bottom of a dramatic metal staircase is an ultra-chic living room with glass walls that open to a sleek infinity pool and a sunken fire pit. Inside, you will find a spacious master bedroom complete with a Japanese Tatami, a suspended orb fireplace, and breathtaking views overlooking the infinity pool and sprawling cityscape. The master suite features a walk-in shower, a huge bathtub, a steam shower, and heated floors. The gourmet chefs kitchen is perfect for entertaining, with its open floor plan, stainless steel appliances, and built-in wine cooler.',
         price: 1300.00
       },
       {

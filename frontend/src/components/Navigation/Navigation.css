@@ -40,7 +40,7 @@ body {
     font-size: 18px;
 }
 
-.nav-list li a:hover {
+.home-icon:hover {
     color: #84afdd;
 }
 
@@ -98,4 +98,25 @@ body {
     cursor: pointer;
     color: #1f3f62;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+
+}
+
+.create-spot-link {
+    text-decoration: none;
+    color: #eaeef3;
+    font-size: 18px;
+    margin-right: 20px;
+    padding: 10px 20px;
+    background-color: #5892cd;
+    border-radius: 5px;
+}
+
+.create-spot-link:hover {
+    cursor: pointer;
+    color: #84afdd;
 }

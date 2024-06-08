@@ -7,6 +7,7 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
+    console.log(sessionUser);
 
     return (
         <nav className="nav-bar">
@@ -15,12 +16,22 @@ function Navigation({ isLoaded }) {
                     <NavLink to="/"><CiHome className="home-icon" size={30} /></NavLink>
                 </li>
             </ul>
-            {isLoaded && (
-                <div className="profile-button-container">
-                    <ProfileButton user={sessionUser} />
-                </div>
-            )}
-        </nav>
+            <div className="nav-right">
+                {isLoaded && (
+                    <>
+                        {sessionUser && (
+                            <div>
+                                <NavLink to="/spots/new" className="create-spot-link">Create a New Spot</NavLink>
+                            </div>
+
+                        )}
+                        < div className="profile-button-container">
+                            <ProfileButton user={sessionUser} />
+                        </div>
+                    </>
+                )}
+            </div>
+        </nav >
     );
 }
 

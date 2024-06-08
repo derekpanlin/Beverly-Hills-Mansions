@@ -19,7 +19,6 @@ function Reviews({ spotId }) {
 
     return (
         <div className="user-reviews">
-            <h1>Reviews Component</h1>
             {reviews.map(review => (
                 <div key={review.id}>
                     <h3>{review.User.firstName}</h3>

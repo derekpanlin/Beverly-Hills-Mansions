@@ -91,28 +91,28 @@ module.exports = {
         spotId: 3
       },
       {
-        url: 'https://media.architecturaldigest.com/photos/5e74f74713ef7b000832f09b/16:9/w_2560%2Cc_limit/S2.jpg',
+        url: 'https://a0.muscache.com/im/pictures/029dfb9a-1a38-4db5-8118-480f660d8362.jpg?im_w=1200',
         preview: true,
         spotId: 4
       },
       {
-        url: 'https://media.architecturaldigest.com/photos/5e74f74713ef7b000832f09b/16:9/w_2560%2Cc_limit/S2.jpg',
-        preview: true,
+        url: 'https://a0.muscache.com/im/pictures/77b8df27-0174-4998-bc79-ea888cb92bf1.jpg?im_w=1440',
+        preview: false,
         spotId: 4
       },
       {
-        url: 'https://media.architecturaldigest.com/photos/5e74f74713ef7b000832f09b/16:9/w_2560%2Cc_limit/S2.jpg',
-        preview: true,
+        url: 'https://a0.muscache.com/im/pictures/9f6b17ba-5473-4d73-85fb-f9176d5fa395.jpg?im_w=1440',
+        preview: false,
         spotId: 4
       },
       {
-        url: 'https://media.architecturaldigest.com/photos/5e74f74713ef7b000832f09b/16:9/w_2560%2Cc_limit/S2.jpg',
-        preview: true,
+        url: 'https://a0.muscache.com/im/pictures/e5b5bdfd-0e84-4350-b52c-6702be69403a.jpg?im_w=1440',
+        preview: false,
         spotId: 4
       },
       {
-        url: 'https://media.architecturaldigest.com/photos/5e74f74713ef7b000832f09b/16:9/w_2560%2Cc_limit/S2.jpg',
-        preview: true,
+        url: 'https://a0.muscache.com/im/pictures/bb7a8c72-1272-4896-bdbb-ae3b6eabc5e0.jpg?im_w=1440',
+        preview: false,
         spotId: 4
       },
       {

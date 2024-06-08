@@ -43,12 +43,13 @@ function SpotDetails() {
                 </div>
                 <div className='reserve-box'>
                     <div className='price-and-rating'>
-                        <p className='spot-price'>{spotDetails.price} / night</p>
+                        <p className='spot-price'>${spotDetails.price} / night</p>
                         <p className='spot-rating'>
                             ★ {spotDetails.avgStarRating || "New"} ·
                             {spotDetails.numReviews > 0 && ` ${spotDetails.numReviews} reviews`}
                         </p>
                     </div>
+                    <button className='reserve-button'>Reserve</button>
                 </div>
             </div>
             <div className='spot-reviews'>

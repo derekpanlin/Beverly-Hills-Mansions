@@ -21,7 +21,6 @@
 
 .main-image {
     flex: 2;
-    /* grow twice height of siblings */
     width: 100%;
     max-width: 500px;
     object-fit: cover;
@@ -42,4 +41,51 @@
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
+}
+
+.spot-description {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+}
+
+.spot-hosted {
+    flex: 2;
+    padding-right: 20px;
+
+}
+
+.reserve-box {
+    color: white;
+    flex: 1;
+    border: 2px solid #110f0f;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    background: linear-gradient(90deg, #3e6183, #0056b3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reserve-button {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #ff5a5f;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.price-and-rating {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.reserve-button:hover {
+    background-color: #ff7878;
 }
