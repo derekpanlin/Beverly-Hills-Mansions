@@ -181,7 +181,7 @@ router.get('/', validateQuery, async (req, res, _next) => {
       price: parseFloat(spot.price),
       createdAt: spot.createdAt,
       updatedAt: spot.updatedAt,
-      avgRating: avgStarRating,
+      avgRating: avgStarRating.toFixed(1),
       previewImage: spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null
     };
   });
@@ -313,7 +313,7 @@ router.get('/:spotId', async (req, res, next) => {
       createdAt: spot.createdAt,
       updatedAt: spot.updatedAt,
       numReviews: numReviews,
-      avgStarRating: avgStarRating,
+      avgStarRating: avgStarRating.toFixed(1),
       SpotImages: spot.SpotImages,
       Owner: spot.User
     });
