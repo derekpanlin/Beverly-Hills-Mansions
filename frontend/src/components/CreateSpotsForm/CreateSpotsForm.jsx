@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { createNewSpot } from "../../store/spots";
@@ -8,6 +8,7 @@ import './CreateSpotsForm.css'
 function CreateSpotForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const sessionUser = useSelector(state => state.session.user);
     const [country, setCountry] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -31,12 +32,24 @@ function CreateSpotForm() {
         if (!name) newErrors.name = 'Name is required';
         if (!price) newErrors.price = 'Price is required';
         if (!previewImage) newErrors.previewImage = 'Preview image is required';
-        if (!previewImage && !images || !/\.(png|jpe?g)$/i.test(images)) newErrors.images = 'Image URL must end in .png, .jpg, or .jpeg';
+
+        // Validate preview image URL
+        if (previewImage && !/\.(png|jpe?g)$/i.test(previewImage)) {
+            newErrors.previewImage = 'Preview Image URL must end in .png, .jpg, or .jpeg';
+        }
+
+        // Validate other image URLs if they are not empty
+        images.forEach((image, index) => {
+            if (image && !/\.(png|jpe?g)$/i.test(image)) {
+                newErrors[`images${index}`] = 'Image URL must end in .png, .jpg, or .jpeg';
+            }
+        });
 
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
             const newSpot = {
+                ownerId: sessionUser.id,
                 country,
                 address,
                 city,
@@ -48,11 +61,18 @@ function CreateSpotForm() {
                 url: images
             }
 
+            console.log("Dispatching createNewSpot with:", newSpot);
             const createSpot = await dispatch(createNewSpot(newSpot));
-            if (createSpot) {
-                navigate(`/spots/${createSpot.id}`);
-            }
+            console.log("createSpot response:", createSpot);
 
+            if (createSpot) {
+                console.log("Navigating to:", `/spots/${createSpot.id}`);
+                navigate(`/spots/${createSpot.id}`);
+            } else {
+                console.error("Failed to create spot");
+            }
+        } else {
+            console.log("Validation errors:", newErrors);
         }
     }
 
@@ -63,7 +83,7 @@ function CreateSpotForm() {
             <form onSubmit={handleSubmit} className="create-spot-form">
                 <h2>Create a New Spot</h2>
                 <h3>Where's your place located?</h3>
-                <p>Guests will only get your exact location once they booked a reservation.</p>
+                <h4>Guests will only get your exact location once they booked a reservation.</h4>
                 <label>
                     Country
                     <input

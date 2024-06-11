@@ -24,12 +24,12 @@ const validateSpot = [
     .exists({ checkFalsy: true })
     .notEmpty()
     .withMessage("Country is required"),
-  check("lat")
-    .isFloat({ min: -90, max: 90 })
-    .withMessage("Latitude must be within -90 and 90"),
-  check("lng")
-    .isFloat({ min: -180, max: 180 })
-    .withMessage("Longitude must be within -180 and 180"),
+  // check("lat")
+  //   .isFloat({ min: -90, max: 90 })
+  //   .withMessage("Latitude must be within -90 and 90"),
+  // check("lng")
+  //   .isFloat({ min: -180, max: 180 })
+  //   .withMessage("Longitude must be within -180 and 180"),
   check("name")
     .exists({ checkFalsy: true })
     .notEmpty()
@@ -71,23 +71,23 @@ const validateQuery = [
     .isInt({ min: 1, max: 20 })
     .withMessage('Size must be an integer between 1 and 20'),
 
-  check('minLat')
-    .optional()
-    .isDecimal()
-    .withMessage('Minimum latitude must be a valid decimal number'),
-  check('maxLat')
-    .optional()
-    .isDecimal()
-    .withMessage('Maximum latitude must be a valid decimal number'),
+  // check('minLat')
+  //   .optional()
+  //   .isDecimal()
+  //   .withMessage('Minimum latitude must be a valid decimal number'),
+  // check('maxLat')
+  //   .optional()
+  //   .isDecimal()
+  //   .withMessage('Maximum latitude must be a valid decimal number'),
 
-  check('minLng')
-    .optional()
-    .isDecimal()
-    .withMessage('Minimum longitude must be a valid decimal number'),
-  check('maxLng')
-    .optional()
-    .isDecimal()
-    .withMessage('Maximum longitude must be a valid decimal number'),
+  // check('minLng')
+  //   .optional()
+  //   .isDecimal()
+  //   .withMessage('Minimum longitude must be a valid decimal number'),
+  // check('maxLng')
+  //   .optional()
+  //   .isDecimal()
+  //   .withMessage('Maximum longitude must be a valid decimal number'),
 
   check('minPrice')
     .optional()

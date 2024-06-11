@@ -59,6 +59,7 @@ export const createNewSpot = (newSpot) => async (dispatch) => {
 
     if (res.ok) {
         const data = await res.json();
+        console.log("New spot created:", data)
         dispatch(createSpot(data));
         return data;
     } else {
