@@ -45,8 +45,11 @@ function SpotDetails() {
                     <div className='price-and-rating'>
                         <p className='spot-price'>${spotDetails.price} / night</p>
                         <p className='spot-rating'>
-                            ★ {spotDetails.avgStarRating || "New"} ·
-                            {spotDetails.numReviews > 0 && ` ${spotDetails.numReviews} reviews`}
+                            {spotDetails.numReviews > 0 ?
+                                `★ ${spotDetails.avgStarRating}` :
+                                `★ New`
+                            }
+                            {spotDetails.numReviews > 0 && ` · ${spotDetails.numReviews} reviews`}
                         </p>
                     </div>
                     <button className='reserve-button'>Reserve</button>
@@ -54,8 +57,11 @@ function SpotDetails() {
             </div>
             <div className='spot-reviews'>
                 <h2>
-                    ★ {spotDetails.avgStarRating || "New"} ·
-                    {spotDetails.numReviews > 0 && ` ${spotDetails.numReviews} reviews`}
+                    {spotDetails.numReviews > 0 ?
+                        `★ ${spotDetails.avgStarRating}` :
+                        `★ New`
+                    }
+                    {spotDetails.numReviews > 0 && ` · ${spotDetails.numReviews} reviews`}
                 </h2>
                 < Reviews spotId={spotId} />
             </div>

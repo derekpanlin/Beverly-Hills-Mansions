@@ -61,12 +61,11 @@ function CreateSpotForm() {
                 url: images
             }
 
-            console.log("Dispatching createNewSpot with:", newSpot);
+            // console.log("Dispatching createNewSpot with:", newSpot);
             const createSpot = await dispatch(createNewSpot(newSpot));
-            console.log("createSpot response:", createSpot);
+            // console.log("createSpot response:", createSpot);
 
             if (createSpot) {
-                console.log("Navigating to:", `/spots/${createSpot.id}`);
                 navigate(`/spots/${createSpot.id}`);
             } else {
                 console.error("Failed to create spot");

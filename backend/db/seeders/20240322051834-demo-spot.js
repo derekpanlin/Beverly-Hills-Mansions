@@ -71,7 +71,7 @@ module.exports = {
         lat: 10.96235,
         lng: 30.26534,
         name: 'Secluded Mansion in the Heart of Beverly Hills',
-        description: 'The mansion features an elegant marble foyer, multiple grand living spaces, a state-of-the-art chefs kitchen, and a lavish master suite with a private terrace. The outdoor area boasts meticulously landscaped gardens, a stunning pool, and a guest house, perfect for entertaining and relaxing in style.',
+        description: 'Experience luxury and privacy at its finest in this stunning 8,600 square foot Mediterranean Villa nestled in the heart of Beverly Hills. With seven opulent guest suites, a sprawling backyard oasis featuring a pool, spa, waterfall, and sport court, this estate offers unparalleled relaxation and entertainment opportunities. Concealed behind private gates adjacent to the iconic Beverly Hills Hotel, this estate boasts expansive common areas including a grand living room with a wet bar, formal dining area, family room, and game room. Each bedroom and living space is equipped with a flat-screen TV offering premium cable and streaming services. The game room features a variety of board games, a chess table, electric fireplace, and a professional billiards table for leisurely entertainment. The chefs kitchen is a culinary haven, complete with granite countertops, a breakfast nook, top-of-the-line appliances, and an extensive collection of cookware, bakeware, and kitchen tools. Additionally, guests will find ample dinnerware, glassware, and utensils, as well as a selection of basic cooking spices and essentials.',
         price: 4000.00
       },
       {
@@ -82,9 +82,9 @@ module.exports = {
         country: 'USA',
         lat: 10.96235,
         lng: 30.26534,
-        name: 'Mansion Passed Down By King Louis VI',
-        description: 'Situated in the exclusive gated community of Beverly Park, this sprawling mansion epitomizes grandeur. It offers an impressive double-height entry, a luxurious formal dining room, a spacious family room, and an opulent master suite with dual bathrooms and closets. The expansive grounds include a resort-style pool, tennis court, and numerous outdoor lounging areas, providing a serene escape from the hustle and bustle of city life.',
-        price: 1500.00
+        name: 'Resort-Style Terrace Overlooking LA ',
+        description: 'Experience the epitome of modern luxury with this stunning 4-bedroom, 4.5-bathroom residence located in the prestigious Platinum Triangle. Boasting a home cinema, wine cellar, and breathtaking panoramic views of Los Angeles, this home offers the ultimate in sophistication. Step outside onto the magnificent resort style terrace, where youll find designer deck furniture, a stylish pergola lounge area, and an inviting infinity pool adorned with two floating daybeds. Towering palms emerge from amidst plush turquoise cushions, creating a serene oasis perfect for families and small groups alike. Do not miss the opportunity to indulge in a truly luxurious and deeply relaxing city getaway. Book your stay today and prepare to immerse yourself in unparalleled comfort and elegance.',
+        price: 2500.00
       }
     ], options)
   },
