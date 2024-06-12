@@ -87,7 +87,7 @@ export const createSpotImages = (spotId, url, preview) => async (dispatch) => {
 
     if (res.ok) {
         const data = await res.json();
-        dispatch(createSpotImage(data));
+        dispatch(createSpotImage({ spotId, ...data }));
         return data;
     } else {
         console.error('Failed to create new image for spot')
