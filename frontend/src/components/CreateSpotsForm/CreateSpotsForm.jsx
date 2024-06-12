@@ -104,7 +104,7 @@ function CreateSpotForm() {
             <form onSubmit={handleSubmit} className="create-spot-form">
                 <h2>Create a New Spot</h2>
                 <h3>Where's your place located?</h3>
-                <h4>Guests will only get your exact location once they booked a reservation.</h4>
+                <p>Guests will only get your exact location once they booked a reservation.</p>
                 <label>
                     Country
                     <input
@@ -147,7 +147,9 @@ function CreateSpotForm() {
                     {errors.state && <p className="error-message">{errors.state}</p>}
                 </label>
                 <label>
-                    Describe your place to guests
+                    <h3>Describe your place to guests</h3>
+                    <p>Mention the best features of your space, any special amentities like
+                        fast wif or parking, and what you love about the neighborhood.</p>
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
@@ -167,18 +169,24 @@ function CreateSpotForm() {
                     {errors.name && <p className="error-message">{errors.name}</p>}
                 </label>
                 <label>
-                    Set a base price for your spot
-                    <input
-                        type="number"
-                        value={price !== null ? price : ''}
-                        onChange={(e) => setPrice(e.target.value)}
-                        placeholder="Price per night"
-                    />
+                    <h3>Set a base price for your spot</h3>
+                    <p>Competitive pricing can help your listing stand out and rank higher
+                        in search results.</p>
+                    <div className="price-div">
+                        <input
+                            type="number"
+                            value={price !== null ? price : ''}
+                            onChange={(e) => setPrice(e.target.value)}
+                            placeholder="Price per night"
+                        />
+                    </div>
                     {errors.price && <p className="error-message">{errors.price}</p>}
                 </label>
 
                 <label>
-                    Preview Image URL
+                    <h3>Liven up your spot with photos</h3>
+                    <p>Submit a link to at least one photo to publish your spot.</p>
+
                     <input
                         placeholder="Preview Image URL"
                         type="text"
@@ -186,40 +194,41 @@ function CreateSpotForm() {
                         onChange={(e) => setPreviewImage(e.target.value)}
                     />
                     {errors.previewImage && <p className="error-message">{errors.previewImage}</p>}
-
                 </label>
 
-                <input
-                    placeholder="Image URL"
-                    type="text"
-                    value={image1}
-                    onChange={(e) => setImage1(e.target.value)}
-                />
-                {errors.image1 && <p className="error-message">{errors.image1}</p>}
+                <label>
+                    <input
+                        placeholder="Image URL"
+                        type="text"
+                        value={image1}
+                        onChange={(e) => setImage1(e.target.value)}
+                    />
+                    {errors.image1 && <p className="error-message">{errors.image1}</p>}
 
-                <input
-                    placeholder="Image URL"
-                    type="text"
-                    value={image2}
-                    onChange={(e) => setImage2(e.target.value)}
-                />
-                {errors.image2 && <p className="error-message">{errors.image2}</p>}
+                    <input
+                        placeholder="Image URL"
+                        type="text"
+                        value={image2}
+                        onChange={(e) => setImage2(e.target.value)}
+                    />
+                    {errors.image2 && <p className="error-message">{errors.image2}</p>}
 
-                <input
-                    placeholder="Image URL"
-                    type="text"
-                    value={image3}
-                    onChange={(e) => setImage3(e.target.value)}
-                />
-                {errors.image3 && <p className="error-message">{errors.image3}</p>}
+                    <input
+                        placeholder="Image URL"
+                        type="text"
+                        value={image3}
+                        onChange={(e) => setImage3(e.target.value)}
+                    />
+                    {errors.image3 && <p className="error-message">{errors.image3}</p>}
 
-                <input
-                    placeholder="Image URL"
-                    type="text"
-                    value={image4}
-                    onChange={(e) => setImage4(e.target.value)}
-                />
-                {errors.image4 && <p className="error-message">{errors.image4}</p>}
+                    <input
+                        placeholder="Image URL"
+                        type="text"
+                        value={image4}
+                        onChange={(e) => setImage4(e.target.value)}
+                    />
+                    {errors.image4 && <p className="error-message">{errors.image4}</p>}
+                </label>
 
                 <button type="submit">Create Spot</button>
             </form>

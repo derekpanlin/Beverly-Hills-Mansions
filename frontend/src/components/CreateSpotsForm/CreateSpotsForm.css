@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+
 .form-container {
     max-width: 600px;
     margin: 0 auto;
@@ -6,12 +9,32 @@
     border-radius: 8px;
     background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
 }
 
 .create-spot-form {
     display: flex;
     flex-direction: column;
 }
+
+.create-spot-form textarea::placeholder {
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.price-div {
+    display: flexbox;
+    align-items: center;
+
+}
+
+.price-div::before {
+    content: '$$';
+    margin-right: 8px;
+
+}
+
+
 
 .create-spot-form h2,
 .create-spot-form h3,
