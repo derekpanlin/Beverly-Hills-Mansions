@@ -27,6 +27,7 @@
 
 .create-spot-form input,
 .create-spot-form textarea {
+    margin-top: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;

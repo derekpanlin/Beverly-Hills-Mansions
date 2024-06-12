@@ -7,6 +7,9 @@ const GET_SPOT_DETAILS = "spots/getSpotDetails"
 
 const CREATE_SPOT = "spots/createSpot"
 
+const CREATE_SPOT_IMAGE = "spots/createSpotImage"
+
+
 // Action Creator
 const getSpot = (spots) => {
     return {
@@ -26,6 +29,13 @@ const createSpot = (newSpot) => {
     return {
         type: CREATE_SPOT,
         newSpot
+    }
+}
+
+const createSpotImage = (newImage) => {
+    return {
+        type: CREATE_SPOT_IMAGE,
+        newImage
     }
 }
 
@@ -66,8 +76,26 @@ export const createNewSpot = (newSpot) => async (dispatch) => {
     }
 }
 
+export const createSpotImages = (spotId, url, preview) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ url, preview })
+    });
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(createSpotImage(data));
+        return data;
+    } else {
+        console.error('Failed to create new image for spot')
+    }
+}
+
 // Reducer
-const initialState = { allSpots: {}, currentSpot: {} };
+const initialState = { allSpots: {}, currentSpot: {}, spotImages: {} };
 
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -95,6 +123,15 @@ const spotsReducer = (state = initialState, action) => {
                     [action.newSpot.id]: action.newSpot
                 }
             };
+            return newState;
+        }
+        case CREATE_SPOT_IMAGE: {
+            const newState = { ...state };
+            const spotId = action.newImage.spotId;
+            if (!newState.spotImages[spotId]) {
+                newState.spotImages[spotId] = [];
+            }
+            newState.spotImages[spotId].push(action.newImage);
             return newState;
         }
         default: {

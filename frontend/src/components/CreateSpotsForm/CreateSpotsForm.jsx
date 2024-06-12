@@ -1,14 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { createNewSpot } from "../../store/spots";
+import { createNewSpot, createSpotImages } from "../../store/spots";
 import './CreateSpotsForm.css'
 
 
 function CreateSpotForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const sessionUser = useSelector(state => state.session.user);
     const [country, setCountry] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -17,7 +16,10 @@ function CreateSpotForm() {
     const [name, setName] = useState('');
     const [price, setPrice] = useState(null);
     const [previewImage, setPreviewImage] = useState('');
-    const [images, setImages] = useState(['', '', '', '']);
+    const [image1, setImage1] = useState('');
+    const [image2, setImage2] = useState('');
+    const [image3, setImage3] = useState('');
+    const [image4, setImage4] = useState('');
     const [errors, setErrors] = useState({});
 
     const handleSubmit = async (e) => {
@@ -33,40 +35,60 @@ function CreateSpotForm() {
         if (!price) newErrors.price = 'Price is required';
         if (!previewImage) newErrors.previewImage = 'Preview image is required';
 
+        const regex = /\.(png|jpe?g)$/i;
+
         // Validate preview image URL
-        if (previewImage && !/\.(png|jpe?g)$/i.test(previewImage)) {
+        if (previewImage && !regex.test(previewImage)) {
             newErrors.previewImage = 'Preview Image URL must end in .png, .jpg, or .jpeg';
         }
 
-        // Validate other image URLs if they are not empty
-        images.forEach((image, index) => {
-            if (image && !/\.(png|jpe?g)$/i.test(image)) {
-                newErrors[`images${index}`] = 'Image URL must end in .png, .jpg, or .jpeg';
-            }
-        });
+        // Validate image URLs
+        if (image1 && !regex.test(image1)) {
+            newErrors.image1 = 'Image URL must end in .png, .jpg, or .jpeg';
+        }
+        if (image2 && !regex.test(image2)) {
+            newErrors.image1 = 'Image URL must end in .png, .jpg, or .jpeg';
+        }
+        if (image3 && !regex.test(image3)) {
+            newErrors.image1 = 'Image URL must end in .png, .jpg, or .jpeg';
+        }
+        if (image4 && !regex.test(image4)) {
+            newErrors.image1 = 'Image URL must end in .png, .jpg, or .jpeg';
+        }
+
 
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
             const newSpot = {
-                ownerId: sessionUser.id,
                 country,
                 address,
                 city,
                 state,
                 description,
                 name,
-                price,
-                preview: previewImage,
-                url: images
+                price
             }
 
-            // console.log("Dispatching createNewSpot with:", newSpot);
-            const createSpot = await dispatch(createNewSpot(newSpot));
-            // console.log("createSpot response:", createSpot);
 
-            if (createSpot) {
-                navigate(`/spots/${createSpot.id}`);
+            const createSpot = await dispatch(createNewSpot(newSpot));
+            const spotId = createSpot.id;
+
+
+            if (createSpot && spotId) {
+                const images = [
+                    ...(previewImage ? [{ url: previewImage, preview: true }] : []),
+                    ...(image1 ? [{ url: image1, preview: false }] : []),
+                    ...(image2 ? [{ url: image2, preview: false }] : []),
+                    ...(image3 ? [{ url: image3, preview: false }] : []),
+                    ...(image4 ? [{ url: image4, preview: false }] : []),
+                ];
+
+                for (const image of images) {
+                    await dispatch(createSpotImages(spotId, image.url, image.preview));
+                }
+
+                navigate(`/spots/${spotId}`);
             } else {
                 console.error("Failed to create spot");
             }
@@ -154,32 +176,51 @@ function CreateSpotForm() {
                     />
                     {errors.price && <p className="error-message">{errors.price}</p>}
                 </label>
+
                 <label>
                     Preview Image URL
                     <input
+                        placeholder="Preview Image URL"
                         type="text"
                         value={previewImage}
                         onChange={(e) => setPreviewImage(e.target.value)}
-                        placeholder="Preview Image URL"
                     />
                     {errors.previewImage && <p className="error-message">{errors.previewImage}</p>}
+
                 </label>
-                {images.map((image, index) => (
-                    <label key={index}>
-                        Image URL
-                        <input
-                            type="text"
-                            value={image}
-                            onChange={(e) => {
-                                const newImages = [...images];
-                                newImages[index] = e.target.value;
-                                setImages(newImages);
-                            }}
-                            placeholder="Image URL"
-                        />
-                        {errors.images && <p className="error-message">{errors.images}</p>}
-                    </label>
-                ))}
+
+                <input
+                    placeholder="Image URL"
+                    type="text"
+                    value={image1}
+                    onChange={(e) => setImage1(e.target.value)}
+                />
+                {errors.image1 && <p className="error-message">{errors.image1}</p>}
+
+                <input
+                    placeholder="Image URL"
+                    type="text"
+                    value={image2}
+                    onChange={(e) => setImage2(e.target.value)}
+                />
+                {errors.image2 && <p className="error-message">{errors.image2}</p>}
+
+                <input
+                    placeholder="Image URL"
+                    type="text"
+                    value={image3}
+                    onChange={(e) => setImage3(e.target.value)}
+                />
+                {errors.image3 && <p className="error-message">{errors.image3}</p>}
+
+                <input
+                    placeholder="Image URL"
+                    type="text"
+                    value={image4}
+                    onChange={(e) => setImage4(e.target.value)}
+                />
+                {errors.image4 && <p className="error-message">{errors.image4}</p>}
+
                 <button type="submit">Create Spot</button>
             </form>
         </div>
