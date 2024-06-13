@@ -3,9 +3,29 @@ import { useEffect } from "react";
 import { getReviews } from "../../store/reviews";
 import './Reviews.css';
 
-function Reviews({ spotId }) {
+function Reviews({ spotId, ownerId }) {
     const reviews = useSelector(state => Object.values(state.reviews.reviews))
     const dispatch = useDispatch();
+    const sessionUser = useSelector(state => state.session.user);
+    const isSpotOwner = sessionUser?.id === ownerId;
+    const hasReviewed = reviews.some(review => review.userId === sessionUser?.id);
+
+    console.log(ownerId);
+    console.log(sessionUser.id);
+
+    const handleReviewButton = () => {
+        if (!sessionUser) return false;
+        if (isSpotOwner) return false;
+        if (hasReviewed) return false;
+        return true;
+    }
+
+    const handleFirstReviewRender = () => {
+        if (reviews.length === 0 && handleReviewButton()) {
+            return true;
+        }
+        return false;
+    }
 
     useEffect(() => {
         dispatch(getReviews(spotId));
@@ -19,6 +39,12 @@ function Reviews({ spotId }) {
 
     return (
         <div className="user-reviews">
+            {handleReviewButton() && (
+                <button>Post a Review</button>
+            )}
+            {handleFirstReviewRender() && (
+                <p>Be the first to review!</p>
+            )}
             {reviews.map(review => (
                 <div key={review.id}>
                     <h3>{review.User.firstName}</h3>

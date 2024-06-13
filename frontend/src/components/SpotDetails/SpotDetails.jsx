@@ -10,6 +10,7 @@ function SpotDetails() {
     const spotDetails = useSelector(state => state.spots.currentSpot);
     const dispatch = useDispatch();
     const { spotId } = useParams();
+    const ownerId = spotDetails.ownerId;
 
     useEffect(() => {
         dispatch(getSpotDetails(spotId));
@@ -63,7 +64,7 @@ function SpotDetails() {
                     }
                     {spotDetails.numReviews > 0 && ` · ${spotDetails.numReviews} reviews`}
                 </h2>
-                < Reviews spotId={spotId} />
+                < Reviews spotId={spotId} ownerId={ownerId} />
             </div>
         </div>
     );

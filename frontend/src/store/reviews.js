@@ -5,6 +5,8 @@ const GET_REVIEWS = "reviews/getReviews";
 
 const CLEAR_REVIEWS = "reviews/clearReviews";
 
+const CREATE_REVIEWS = "reviews/createReviews";
+
 // Action Creator
 
 const getReview = (reviews) => {
