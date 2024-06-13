@@ -26,8 +26,6 @@
 }
 
 
-/* PostReviewModal.css */
-
 .star-rating-icons {
     display: flex;
 }
@@ -42,12 +40,10 @@
 
 .star-rating-icons .star-filled {
     color: gold;
-    /* Adjust color for filled star */
     cursor: pointer;
     margin-right: 5px;
 
 }
-
 
 .post-review-modal button {
     padding: 10px 100px;
