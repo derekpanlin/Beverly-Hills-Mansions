@@ -62,3 +62,9 @@
 .post-review-modal button:hover {
     background-color: #b64747;
 }
+
+.post-review-modal button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
