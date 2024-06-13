@@ -1,7 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getReviews } from "../../store/reviews";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import './Reviews.css';
+import PostReviewModal from "../PostReviewModal/PostReviewModal";
 
 function Reviews({ spotId, ownerId }) {
     const reviews = useSelector(state => Object.values(state.reviews.reviews))
@@ -10,8 +12,6 @@ function Reviews({ spotId, ownerId }) {
     const isSpotOwner = sessionUser?.id === ownerId;
     const hasReviewed = reviews.some(review => review.userId === sessionUser?.id);
 
-    console.log(ownerId);
-    console.log(sessionUser.id);
 
     const handleReviewButton = () => {
         if (!sessionUser) return false;
@@ -40,7 +40,10 @@ function Reviews({ spotId, ownerId }) {
     return (
         <div className="user-reviews">
             {handleReviewButton() && (
-                <button>Post a Review</button>
+                <OpenModalButton
+                    buttonText="Post a Review!"
+                    modalComponent={PostReviewModal}
+                />
             )}
             {handleFirstReviewRender() && (
                 <p>Be the first to review!</p>

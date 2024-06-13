@@ -62,7 +62,7 @@ export const createNewSpot = (newSpot) => async (dispatch) => {
     const res = await csrfFetch('/api/spots', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(newSpot)
     });

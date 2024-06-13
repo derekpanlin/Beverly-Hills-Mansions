@@ -23,6 +23,11 @@ function SpotDetails() {
     const mainImage = spotDetails.SpotImages.find(image => image.preview);
     const otherImages = spotDetails.SpotImages.filter(image => !image.preview);
 
+    // Handle reserve button alert
+    const reserveButtonAlert = () => {
+        alert("Feature coming soon...");
+    };
+
     return (
         <div className='spot-details-container'>
             <div className='spot-header'>
@@ -53,7 +58,7 @@ function SpotDetails() {
                             {spotDetails.numReviews > 0 && ` · ${spotDetails.numReviews} reviews`}
                         </p>
                     </div>
-                    <button className='reserve-button'>Reserve</button>
+                    <button className='reserve-button' onClick={reserveButtonAlert}>Reserve</button>
                 </div>
             </div>
             <div className='spot-reviews'>
