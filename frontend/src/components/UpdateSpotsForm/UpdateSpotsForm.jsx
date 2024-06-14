@@ -103,11 +103,11 @@ function UpdateSpotsForm() {
             }
 
 
-            const createSpot = await dispatch(createNewSpot(newSpot));
-            const spotId = createSpot.id;
+            const updatedSpot = await dispatch(updateSpots(spotId, newSpot));
 
 
-            if (createSpot && spotId) {
+            if (updatedSpot && spotId) {
+                const spotId = updatedSpot.id;
                 const images = [
                     ...(previewImage ? [{ url: previewImage, preview: true }] : []),
                     ...(image1 ? [{ url: image1, preview: false }] : []),
