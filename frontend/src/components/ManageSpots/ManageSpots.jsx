@@ -1,16 +1,23 @@
 import { NavLink } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { getSpots } from "../../store/spots";
 import './ManageSpots.css'
 
 function ManageSpots() {
     const sessionUser = useSelector(state => state.session.user);
     const spots = useSelector(state => Object.values(state.spots.allSpots).filter(spot => spot.ownerId === sessionUser.id));
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleClick = (spotId) => {
         navigate(`/spots/${spotId}`)
     };
+
+    useEffect(() => {
+        dispatch(getSpots())
+    }, [dispatch])
 
     return (
         <div className="spots-container">
