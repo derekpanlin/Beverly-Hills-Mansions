@@ -11,6 +11,7 @@ const CREATE_SPOT_IMAGE = "spots/createSpotImage"
 
 const UPDATE_SPOT = "spots/updateSpot"
 
+const DELETE_SPOT = "spots/deleteSpot"
 
 
 // Action Creator
@@ -48,6 +49,14 @@ const updateSpot = (updatedSpot) => {
         payload: updatedSpot
     }
 }
+
+const deleteSpotAction = (spotId) => {
+    return {
+        type: DELETE_SPOT,
+        payload: spotId
+    }
+}
+
 // Thunk Action Creator
 export const getSpots = () => async (dispatch) => {
     const res = await csrfFetch('/api/spots');
@@ -118,6 +127,19 @@ export const updateSpots = (spotId, payload) => async (dispatch) => {
         return data;
     }
 }
+
+export const deleteSpot = (spotId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+        method: "DELETE",
+    });
+
+    if (res.ok) {
+        dispatch(deleteSpotAction(spotId))
+    } else {
+        console.error("Failed to delete spot");
+    }
+
+}
 // Reducer
 const initialState = { allSpots: {}, currentSpot: {}, spotImages: {} };
 
@@ -161,6 +183,11 @@ const spotsReducer = (state = initialState, action) => {
         case UPDATE_SPOT: {
             const newState = { ...state, allSpots: { ...state.allSpots } };
             newState.allSpots[action.payload.id] = action.payload;
+            return newState;
+        }
+        case DELETE_SPOT: {
+            const newState = { ...state, allSpots: { ...state.allSpots } };
+            delete newState.allSpots[action.payload.id];
             return newState;
         }
         default: {

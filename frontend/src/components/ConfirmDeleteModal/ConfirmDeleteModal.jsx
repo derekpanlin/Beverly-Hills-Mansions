@@ -1,7 +1,9 @@
 import './ConfirmDeleteModal.css'
 import { useModal } from '../../context/Modal';
+import { useDispatch } from 'react-redux';
 
-function ConfirmDeleteModal() {
+
+function ConfirmDeleteModal({ spotId }) {
     const { closeModal } = useModal();
 
     return (

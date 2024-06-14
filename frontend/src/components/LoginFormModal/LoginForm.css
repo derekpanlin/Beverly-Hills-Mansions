@@ -75,7 +75,7 @@ button:disabled {
 
 .login-form button:not(:disabled):hover {
     background-color: #0056b3;
-    /* Apply hover effect only when button is not disabled */
+
 }
 
 .login-form .error {
