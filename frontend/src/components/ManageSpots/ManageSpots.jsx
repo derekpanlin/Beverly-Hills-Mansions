@@ -33,21 +33,24 @@ function ManageSpots() {
             </div>
             <div className="spots-grid">
                 {spots.map(spot => (
-                    <div key={spot.id} className='spot-tile' onClick={() => handleClick(spot.id)}>
-                        <div className='spot-image'>
-                            <img src={spot.previewImage} alt={spot.name} />
-                        </div>
-                        <div className='spot-details'>
-                            <div className='tooltip'>{spot.name}</div>
-                            <div className='spot-location-rating'>
-                                <div className='spot-location'>{spot.city}, {spot.state}</div>
-                                <div className='spot-rating'>★ {spot.avgRating || "New"} </div>
+                    <div className="manage-spot-tile">
+                        <div key={spot.id} className='spot-tile' onClick={() => handleClick(spot.id)}>
+                            <div className='spot-image'>
+                                <img src={spot.previewImage} alt={spot.name} />
                             </div>
-                            <div className="spot-price">${spot.price} / night</div>
+                            <div className='spot-details'>
+                                <div className='tooltip'>{spot.name}</div>
+                                <div className='spot-location-rating'>
+                                    <div className='spot-location'>{spot.city}, {spot.state}</div>
+                                    <div className='spot-rating'>★ {spot.avgRating || "New"} </div>
+                                </div>
+                                <div className="spot-price">${spot.price} / night</div>
+                            </div>
                         </div>
+
                         <div className="update-delete-button">
-                            <button>Update</button>
-                            <button>Delete</button>
+                            <NavLink to={`/spots/${spot.id}/edit`} className="button-link">Update</NavLink>
+                            <button className="delete-button">Delete</button>
                         </div>
                     </div>
                 ))}

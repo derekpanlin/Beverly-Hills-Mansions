@@ -5,3 +5,32 @@
     padding: 0px 0;
 
 }
+
+.button-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background: linear-gradient(90deg, #3f8ad5, #0056b3);
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+}
+
+.button-link:hover {
+    background: linear-gradient(90deg, #609bd5, #0369d0);
+    /* Darker shade on hover */
+}
+
+.delete-button {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: #dc3545;
+
+}
+
+.delete-button:hover {
+    cursor: pointer;
+    background-color: #75333a
+}
