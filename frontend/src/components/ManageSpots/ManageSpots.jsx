@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { getSpots } from "../../store/spots";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import './ManageSpots.css'
 
 function ManageSpots() {
@@ -11,13 +13,15 @@ function ManageSpots() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+
     const handleClick = (spotId) => {
         navigate(`/spots/${spotId}`)
     };
 
+
     useEffect(() => {
         dispatch(getSpots())
-    }, [dispatch])
+    }, [dispatch, spots])
 
     return (
         <div className="spots-container">
@@ -50,7 +54,11 @@ function ManageSpots() {
 
                         <div className="update-delete-button">
                             <NavLink to={`/spots/${spot.id}/edit`} className="button-link">Update</NavLink>
-                            <button className="delete-button">Delete</button>
+                            <OpenModalButton
+                                buttonText="Delete"
+                                modalComponent={<ConfirmDeleteModal spotId={spot.id} />}
+                                className="delete-button"
+                            />
                         </div>
                     </div>
                 ))}
