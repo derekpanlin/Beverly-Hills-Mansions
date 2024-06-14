@@ -1,0 +1,11 @@
+/* ProfileButton.css */
+
+.manage-spots-link {
+    color: rgb(64, 64, 145);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.manage-spots-link:hover {
+    cursor: pointer;
+}

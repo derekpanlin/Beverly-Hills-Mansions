@@ -48,7 +48,7 @@ function Reviews({ spotId, ownerId }) {
             {handleFirstReviewRender() && (
                 <p>Be the first to review!</p>
             )}
-            {reviews.map(review => (
+            {[...reviews].reverse().map(review => (
                 <div key={review.id}>
                     <h3>{review?.User.firstName}</h3>
                     <p className="date">{formatDate(review.createdAt)}</p>

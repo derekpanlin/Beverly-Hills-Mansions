@@ -6,6 +6,7 @@ import * as sessionActions from '../../store/session';
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import SignupFormModal from "../SignUpFormModal/SignupFormModal";
+import './ProfileButton.css';
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
@@ -44,6 +45,10 @@ function ProfileButton({ user }) {
 
     const profileDropdownClass = "profile-dropdown" + (showMenu ? "" : " hidden");
 
+    const handleManageSpotsNav = () => {
+        closeMenu();
+        navigate('/spots/current')
+    }
 
     return (
         <div className="profile-button-container">
@@ -54,7 +59,9 @@ function ProfileButton({ user }) {
                 {user ? (
                     <>
                         <li>Hello, {user.firstName}</li>
-                        <li>Link to manage Spots Page</li>
+                        <li>
+                            <button className="manage-spots-link" onClick={handleManageSpotsNav}>Manage Spots </button>
+                        </li>
                         <li>{user.email}</li>
                         <li>
                             <button onClick={logout}>Log Out</button>
