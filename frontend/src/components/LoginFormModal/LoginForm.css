@@ -60,7 +60,7 @@ button:disabled {
     padding: 10px 2px;
     border: none;
     border-radius: 50px;
-    background-color: #007bff;
+    background-color: #33a1d8;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -74,7 +74,7 @@ button:disabled {
 }
 
 .login-form button:not(:disabled):hover {
-    background-color: #0056b3;
+    background-color: #0a6dd6;
 
 }
 

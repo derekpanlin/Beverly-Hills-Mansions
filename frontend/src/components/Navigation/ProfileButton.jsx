@@ -60,7 +60,7 @@ function ProfileButton({ user }) {
                     <>
                         <li>Hello, {user.firstName}</li>
                         <li>
-                            <button className="manage-spots-link" onClick={handleManageSpotsNav}>Manage Spots </button>
+                            <button className="manage-spots-link" onClick={handleManageSpotsNav}>Manage Spots</button>
                         </li>
                         <li>{user.email}</li>
                         <li>

@@ -1,11 +1,63 @@
-.delete-button {
-    padding: 8px 12px;
+.confirm-delete-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
     border-radius: 8px;
-    background-color: #dc3545;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 300px;
+    /* Adjust width as needed */
+    text-align: center;
+}
+
+.confirm-delete-modal h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.confirm-delete-modal h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.delete-modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* Adjust spacing between buttons */
+}
+
+.delete-modal-buttons button {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    width: 100%;
+}
+
+.delete-modal-buttons .yes-button {
+    background-color: #ff5a5f;
+}
+
+.delete-modal-buttons .yes-button:hover {
+    background-color: #ff7878;
+    opacity: 0.8;
 
 }
 
-.delete-button:hover {
-    cursor: pointer;
-    background-color: #75333a
+.delete-modal-buttons .no-button {
+    background-color: black;
+
+}
+
+.delete-modal-buttons .no-button:hover {
+    background-color: grey;
+    /* Lighter shade on hover */
+    opacity: 0.8;
+    /* Reduce opacity on hover */
 }
