@@ -70,6 +70,7 @@ button:disabled {
 
 .login-form button:disabled {
     cursor: not-allowed;
+    background-color: grey;
 }
 
 .login-form button:not(:disabled):hover {

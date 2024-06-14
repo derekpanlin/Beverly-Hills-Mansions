@@ -30,7 +30,7 @@ function LoginFormModal() {
         const errors = {};
 
         if (credential.length < 4) {
-            errors.credential = "Credential must be more than 4 characters"
+            errors.login = "Credential must be more than 4 characters"
         }
 
         if (password.length < 6) {
@@ -65,8 +65,8 @@ function LoginFormModal() {
                             required
                         />
                     </label>
-                    {errors.password && <p className="error">{errors.password}</p>}
-                    <button disabled={Object.values(errors).length} type="submit">Log In</button>
+                    {/* {errors.password && <p className="error">{errors.password}</p>} */}
+                    <button disabled={Object.values(errors).length > 0} type="submit">Log In</button>
                 </form>
             </div>
         </div>
