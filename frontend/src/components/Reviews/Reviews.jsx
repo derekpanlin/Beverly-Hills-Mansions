@@ -35,14 +35,14 @@ function Reviews({ spotId, ownerId }) {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
     };
-    console.log(reviews)
+
 
     return (
         <div className="user-reviews">
             {handleReviewButton() && (
                 <OpenModalButton
                     buttonText="Post a Review!"
-                    modalComponent={<PostReviewModal />}
+                    modalComponent={<PostReviewModal spotId={spotId} />}
                 />
             )}
             {handleFirstReviewRender() && (
@@ -50,7 +50,7 @@ function Reviews({ spotId, ownerId }) {
             )}
             {reviews.map(review => (
                 <div key={review.id}>
-                    <h3>{review.User.firstName}</h3>
+                    <h3>{review?.User.firstName}</h3>
                     <p className="date">{formatDate(review.createdAt)}</p>
                     <p className="review-description">{review.review}</p>
                 </div>

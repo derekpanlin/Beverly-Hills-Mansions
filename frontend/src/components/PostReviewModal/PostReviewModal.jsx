@@ -3,12 +3,15 @@ import './PostReviewModal.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useModal } from "../../context/Modal";
+import { useDispatch } from 'react-redux';
+import { createReviews } from "../../store/reviews";
 
-function PostReviewModal() {
+function PostReviewModal({ spotId }) {
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(0);
     const [buttonDisabled, setButtonDisabled] = useState(true);
-    const { setModalContent, closeModal } = useModal();
+    const { closeModal } = useModal();
+    const dispatch = useDispatch();
 
     const handleStarClick = (index) => {
         setStars(index + 1);
@@ -23,12 +26,20 @@ function PostReviewModal() {
     }
 
     const updateButtonState = (text, rating) => {
-        setButtonDisabled(text.length < 10 && rating < 1)
+        setButtonDisabled(text.length < 10 || rating < 1)
     }
 
-    const handleSubmit = () => {
-        // Submission
-        closeModal();
+    const handleSubmit = async () => {
+        const reviewData = {
+            review,
+            stars,
+        };
+
+        const result = await dispatch(createReviews(spotId, reviewData));
+
+        if (result) {
+            closeModal();
+        }
     }
 
     const starCount = 5;
@@ -41,7 +52,7 @@ function PostReviewModal() {
             <textarea
                 placeholder="Leave your review here..."
                 value={review}
-                onChange={(e) => setReview(e.target.value)}
+                onChange={handleTextArea}
             />
             <div className='star-rating-icons'>
                 {starArray.map(index => (
@@ -51,7 +62,7 @@ function PostReviewModal() {
                         onClick={() => handleStarClick(index)}
                         className={index < stars ? 'star-filled' : 'star-empty'}
                     />
-                ))}
+                ))} Stars
             </div>
             <button
                 onClick={handleSubmit}

@@ -41,7 +41,7 @@ export const getReviews = (spotId) => async (dispatch) => {
     }
 };
 
-export const createReviews = (spotId, review) => async (dispatch) => {
+export const createReviews = (spotId, review) => async (dispatch, getState) => {
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: {
@@ -52,8 +52,11 @@ export const createReviews = (spotId, review) => async (dispatch) => {
 
     if (res.ok) {
         const data = await res.json();
-        dispatch(createReview(data));
-        return data;
+        const state = getState();
+        const user = state.session.user;
+        const payload = { ...data, User: { id: user.id, firstName: user.firstName, lastName: user.lastName } }
+        dispatch(createReview(payload));
+        return payload;
     } else {
         const error = await response.json();
         return { errors: error.errors || 'Failed to post review' };

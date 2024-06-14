@@ -8,13 +8,14 @@ import Reviews from '../Reviews/Reviews';
 
 function SpotDetails() {
     const spotDetails = useSelector(state => state.spots.currentSpot);
+    const reviews = useSelector(state => state.reviews.reviews);
     const dispatch = useDispatch();
     const { spotId } = useParams();
     const ownerId = spotDetails.ownerId;
 
     useEffect(() => {
         dispatch(getSpotDetails(spotId));
-    }, [dispatch, spotId])
+    }, [dispatch, spotId, reviews])
 
     if (!spotDetails || !spotDetails.SpotImages) {
         return null;
@@ -22,6 +23,8 @@ function SpotDetails() {
 
     const mainImage = spotDetails.SpotImages.find(image => image.preview);
     const otherImages = spotDetails.SpotImages.filter(image => !image.preview);
+
+    const reviewText = spotDetails.numReviews === 1 ? "review" : "reviews";
 
     // Handle reserve button alert
     const reserveButtonAlert = () => {
@@ -55,7 +58,7 @@ function SpotDetails() {
                                 `★ ${spotDetails.avgStarRating}` :
                                 `★ New`
                             }
-                            {spotDetails.numReviews > 0 && ` · ${spotDetails.numReviews} reviews`}
+                            {spotDetails.numReviews > 0 && ` · ${spotDetails.numReviews} ${reviewText}`}
                         </p>
                     </div>
                     <button className='reserve-button' onClick={reserveButtonAlert}>Reserve</button>
@@ -67,7 +70,7 @@ function SpotDetails() {
                         `★ ${spotDetails.avgStarRating}` :
                         `★ New`
                     }
-                    {spotDetails.numReviews > 0 && ` · ${spotDetails.numReviews} reviews`}
+                    {spotDetails.numReviews > 0 && ` · ${spotDetails.numReviews} ${reviewText}`}
                 </h2>
                 < Reviews spotId={spotId} ownerId={ownerId} />
             </div>
