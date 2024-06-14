@@ -1,3 +1,8 @@
-manage-spots-header {
-    margin-left: 10px;
+.manage-spots-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+
+    padding: 0px 0;
+
 }

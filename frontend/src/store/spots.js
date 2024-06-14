@@ -10,6 +10,7 @@ const CREATE_SPOT = "spots/createSpot"
 const CREATE_SPOT_IMAGE = "spots/createSpotImage"
 
 
+
 // Action Creator
 const getSpot = (spots) => {
     return {
