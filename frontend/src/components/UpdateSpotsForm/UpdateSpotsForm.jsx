@@ -1,11 +1,11 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { createNewSpot, createSpotImages } from "../../store/spots";
-import './CreateSpotsForm.css'
+import { updateSpots, createSpotImages } from "../../store/spots";
+import './UpdateSpotsForm.css'
 
 
-function CreateSpotsForm() {
+function UpdateSpotsForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [country, setCountry] = useState('');
@@ -236,4 +236,4 @@ function CreateSpotsForm() {
     );
 }
 
-export default CreateSpotsForm;
+export default UpdateSpotsForm;
