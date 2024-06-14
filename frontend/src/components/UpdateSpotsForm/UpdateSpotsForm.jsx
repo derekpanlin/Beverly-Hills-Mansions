@@ -1,11 +1,14 @@
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import { updateSpots, createSpotImages } from "../../store/spots";
+import { updateSpots, createSpotImages, getSpotDetails } from "../../store/spots";
 import './UpdateSpotsForm.css'
 
 
 function UpdateSpotsForm() {
+    const { spotId } = useParams();
+    const spots = useSelector(state => state.spots.currentSpot)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [country, setCountry] = useState('');
@@ -21,6 +24,35 @@ function UpdateSpotsForm() {
     const [image3, setImage3] = useState('');
     const [image4, setImage4] = useState('');
     const [errors, setErrors] = useState({});
+
+    // console.log(spots);
+
+    useEffect(() => {
+        dispatch(getSpotDetails(spotId))
+    }, [dispatch, spotId]);
+
+    useEffect(() => {
+        if (spots) {
+            setCountry(spots.country);
+            setAddress(spots.address);
+            setCity(spots.city);
+            setState(spots.state);
+            setDescription(spots.description);
+            setName(spots.name);
+            setPrice(spots.price);
+        }
+
+        if (spots.SpotImages) {
+            const previewImage = spots.SpotImages.find(img => img.preview === true);
+            const urlImage = spots.SpotImages.filter(img => img.preview === false);
+
+            setPreviewImage(previewImage.url);
+            setImage1(urlImage[0].url);
+            setImage2(urlImage[1].url);
+            setImage3(urlImage[2].url);
+            setImage4(urlImage[3].url);
+        }
+    }, [spots])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
