@@ -45,8 +45,8 @@
 }
 
 .delete-modal-buttons .yes-button:hover {
-    background-color: #ff7878;
-    opacity: 0.8;
+    background-color: #cf4242;
+
 
 }
 
@@ -56,8 +56,6 @@
 }
 
 .delete-modal-buttons .no-button:hover {
-    background-color: grey;
-    /* Lighter shade on hover */
-    opacity: 0.8;
-    /* Reduce opacity on hover */
+    background-color: #cac7c7;
+
 }

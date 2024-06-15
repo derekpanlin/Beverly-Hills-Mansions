@@ -4,6 +4,7 @@ import { getReviews } from "../../store/reviews";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import './Reviews.css';
 import PostReviewModal from "../PostReviewModal/PostReviewModal";
+import { deleteReview } from "../../store/reviews";
 
 function Reviews({ spotId, ownerId }) {
     const reviews = useSelector(state => Object.values(state.reviews.reviews))
@@ -26,6 +27,11 @@ function Reviews({ spotId, ownerId }) {
         }
         return false;
     }
+
+    const handleDelete = async (reviewId) => {
+        await dispatch(deleteReview(reviewId));
+        dispatch(getReviews(spotId));
+    };
 
     useEffect(() => {
         dispatch(getReviews(spotId));
@@ -54,6 +60,12 @@ function Reviews({ spotId, ownerId }) {
                     <h3>{review?.User.firstName}</h3>
                     <p className="date">{formatDate(review.createdAt)}</p>
                     <p className="review-description">{review.review}</p>
+                    <div>{sessionUser && sessionUser.id === review.userId && (
+                        <button onClick={() => handleDelete(review.id)} className="delete-button">
+                            Delete review
+                        </button>
+                    )}
+                    </div>
                 </div>
 
             ))}
