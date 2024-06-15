@@ -51,11 +51,11 @@
 }
 
 .delete-modal-buttons .no-button {
-    background-color: black;
+    background-color: rgb(82, 82, 82);
 
 }
 
 .delete-modal-buttons .no-button:hover {
-    background-color: #cac7c7;
+    background-color: #949494;
 
 }
