@@ -135,7 +135,7 @@ function UpdateSpotsForm() {
         <div className="form-container">
             <form onSubmit={handleSubmit} className="create-spot-form">
                 <h2>Create a New Spot</h2>
-                <h3>Where's your place located?</h3>
+                <h3>Wheres your place located?</h3>
                 <p>Guests will only get your exact location once they booked a reservation.</p>
                 <label>
                     Country

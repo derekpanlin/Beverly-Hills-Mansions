@@ -37,8 +37,8 @@ function ManageSpots() {
             </div>
             <div className="spots-grid">
                 {spots.map(spot => (
-                    <div className="manage-spot-tile">
-                        <div key={spot.id} className='spot-tile' onClick={() => handleClick(spot.id)}>
+                    <div key={spot.id} className="manage-spot-tile">
+                        <div className='spot-tile' onClick={() => handleClick(spot.id)}>
                             <div className='spot-image'>
                                 <img src={spot.previewImage} alt={spot.name} />
                             </div>

@@ -137,7 +137,7 @@ export const deleteSpot = (spotId) => async (dispatch) => {
         dispatch(deleteSpotAction(spotId))
     } else {
         console.error("Failed to delete spot");
-    };
+    }
 
 }
 // Reducer

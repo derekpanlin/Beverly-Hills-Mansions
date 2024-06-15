@@ -67,7 +67,7 @@ export const createReviews = (spotId, review) => async (dispatch, getState) => {
         dispatch(createReview(payload));
         return payload;
     } else {
-        const error = await response.json();
+        const error = await res.json();
         return { errors: error.errors || 'Failed to post review' };
     }
 }
@@ -81,7 +81,7 @@ export const deleteReview = (reviewId) => async (dispatch) => {
         dispatch(deleteReviewAction(reviewId))
     } else {
         console.error("Failed to delete review");
-    };
+    }
 }
 
 
@@ -97,15 +97,15 @@ const reviewsReducer = (state = initialState, action) => {
                 newState.reviews[review.id] = review;
             });
             return newState;
-        };
+        }
         case CLEAR_REVIEWS: {
             return { reviews: {} };
-        };
+        }
         case CREATE_REVIEWS: {
             const newState = { ...state }
             newState.reviews = { ...state.reviews, [action.payload.id]: action.payload }
             return newState;
-        };
+        }
         case DELETE_REVIEWS: {
             const newState = { ...state }
             delete newState.reviews[action.payload]
