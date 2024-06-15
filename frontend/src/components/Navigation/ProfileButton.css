@@ -9,3 +9,32 @@
 .manage-spots-link:hover {
     cursor: pointer;
 }
+
+#avatar-button {
+    background-color: #0056b3;
+    padding: 5px;
+    border: 2px solid white;
+    border-radius: 8px;
+}
+
+#avatar-button:hover {
+    border: 2px solid #cccc;
+}
+
+
+
+.avatar-icon {
+    color: white;
+    padding: 0px;
+    margin-left: 10px;
+}
+
+#avatar-button:hover .hamburger-icon,
+#avatar-button:hover .avatar-icon {
+    color: #cccc;
+}
+
+.hamburger-icon {
+    color: white;
+    padding: 0px;
+}

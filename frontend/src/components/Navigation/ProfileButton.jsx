@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
 import { RxAvatar } from "react-icons/rx";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FaRegCircleUser } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
@@ -52,8 +54,9 @@ function ProfileButton({ user }) {
 
     return (
         <div className="profile-button-container">
-            <button onClick={toggleMenu}>
-                <RxAvatar size={40} />
+            <button id="avatar-button" onClick={toggleMenu}>
+                <GiHamburgerMenu className="hamburger-icon" size={40} />
+                <FaRegCircleUser className="avatar-icon" size={40} />
             </button>
             <ul className={profileDropdownClass} ref={ulRef}>
                 {user ? (
