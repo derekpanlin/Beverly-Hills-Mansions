@@ -1,14 +1,15 @@
 import './ConfirmDeleteReviewModal.css'
 import { useDispatch } from 'react-redux';
-import { deleteReview } from '../../store/reviews';
+import { deleteReview, getReviews } from '../../store/reviews';
 import { useModal } from '../../context/Modal';
 
-function ConfirmDeleteReviewModal({ reviewId }) {
+function ConfirmDeleteReviewModal({ reviewId, spotId }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
     const handleDelete = async (reviewId) => {
         await dispatch(deleteReview(reviewId));
+        await dispatch(getReviews(spotId))
         closeModal();
     };
 

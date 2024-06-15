@@ -59,7 +59,7 @@ function Reviews({ spotId, ownerId }) {
                     <div>{sessionUser && sessionUser.id === review.userId && (
                         <OpenModalButton
                             buttonText="Delete"
-                            modalComponent={<ConfirmDeleteReviewModal reviewId={review.id} />}
+                            modalComponent={<ConfirmDeleteReviewModal reviewId={review.id} spotId={spotId} />}
                             className="delete-button"
                         />
                     )}
