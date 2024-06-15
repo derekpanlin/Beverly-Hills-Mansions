@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 50px;
-    padding: 0px 0;
-
+    padding: 0;
+    /* Adjust as needed */
 }
 
 .button-link {
@@ -15,22 +15,23 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
-
+    margin-right: 10px;
+    /* Adjust spacing between buttons */
 }
 
 .button-link:hover {
     background: linear-gradient(90deg, #609bd5, #0369d0);
-
 }
 
 .delete-button {
-    padding: 8px 12px;
+    padding: 8px 16px;
     border-radius: 8px;
     background-color: #dc3545;
-
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
 .delete-button:hover {
-    cursor: pointer;
-    background-color: #75333a
+    background-color: #75333a;
 }

@@ -43,6 +43,7 @@ function Reviews({ spotId, ownerId }) {
                 <OpenModalButton
                     buttonText="Post a Review!"
                     modalComponent={<PostReviewModal spotId={spotId} />}
+                    className="post-a-review-button"
                 />
             )}
             {handleFirstReviewRender() && (

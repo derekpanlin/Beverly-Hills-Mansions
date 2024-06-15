@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { getSpots } from "../../store/spots";
+import './ManageSpots.css'
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
-import './ManageSpots.css'
 
 function ManageSpots() {
     const sessionUser = useSelector(state => state.session.user);
