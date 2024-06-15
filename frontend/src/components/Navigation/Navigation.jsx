@@ -13,7 +13,7 @@ function Navigation({ isLoaded }) {
         <nav className="nav-bar">
             <ul className="nav-list">
                 <li>
-                    <NavLink to="/"><CiHome className="home-icon" size={30} /></NavLink>
+                    <NavLink to="/"><img id="logo-img" src="/logo.png" alt={<CiHome size={30} />} /></NavLink>
                 </li>
             </ul>
             <div className="nav-right">
