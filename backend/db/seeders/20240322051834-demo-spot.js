@@ -59,7 +59,7 @@ module.exports = {
         lat: 37.96235,
         lng: 50.26534,
         name: 'Japanese Inspired Home With Scintillating Views',
-        description: 'Welcome to L.A.! Nestled above the Sunset Strip behind a gated driveway, this romantically private contemporary Japanese-style house boasts unparalleled panoramic views from downtown to the ocean. At the bottom of a dramatic metal staircase is an ultra-chic living room with glass walls that open to a sleek infinity pool and a sunken fire pit. Inside, you will find a spacious master bedroom complete with a Japanese Tatami, a suspended orb fireplace, and breathtaking views overlooking the infinity pool and sprawling cityscape. The master suite features a walk-in shower, a huge bathtub, a steam shower, and heated floors. The gourmet chefs kitchen is perfect for entertaining, with its open floor plan, stainless steel appliances, and built-in wine cooler.',
+        description: 'Welcome to L.A.! Nestled above the Sunset Strip behind a gated driveway, this romantically private contemporary Japanese-style house boasts unparalleled panoramic views from downtown to the ocean. At the bottom of a dramatic metal staircase is an ultra-chic living room with glass walls that open to a sleek infinity pool and a sunken fire pit. Inside, you will find a spacious master bedroom complete with a Japanese Tatami, a suspended orb fireplace, and breathtaking views overlooking the infinity pool and sprawling cityscape. The master suite features a walk-in shower, a huge bathtub, a steam shower, and heated floors.',
         price: 1300.00
       },
       {
@@ -71,7 +71,7 @@ module.exports = {
         lat: 10.96235,
         lng: 30.26534,
         name: 'Secluded Mansion in the Heart of Beverly Hills',
-        description: 'Experience luxury and privacy at its finest in this stunning 8,600 square foot Mediterranean Villa nestled in the heart of Beverly Hills. With seven opulent guest suites, a sprawling backyard oasis featuring a pool, spa, waterfall, and sport court, this estate offers unparalleled relaxation and entertainment opportunities. Concealed behind private gates adjacent to the iconic Beverly Hills Hotel, this estate boasts expansive common areas including a grand living room with a wet bar, formal dining area, family room, and game room. Each bedroom and living space is equipped with a flat-screen TV offering premium cable and streaming services. The game room features a variety of board games, a chess table, electric fireplace, and a professional billiards table for leisurely entertainment. The chefs kitchen is a culinary haven, complete with granite countertops, a breakfast nook, top-of-the-line appliances, and an extensive collection of cookware, bakeware, and kitchen tools. Additionally, guests will find ample dinnerware, glassware, and utensils, as well as a selection of basic cooking spices and essentials.',
+        description: 'Experience luxury and privacy at its finest in this stunning 8,600 square foot Mediterranean Villa nestled in the heart of Beverly Hills. With seven opulent guest suites, a sprawling backyard oasis featuring a pool, spa, waterfall, and sport court, this estate offers unparalleled relaxation and entertainment opportunities. Concealed behind private gates adjacent to the iconic Beverly Hills Hotel, this estate boasts expansive common areas including a grand living room with a wet bar, formal dining area, family room, and game room. Each bedroom and living space is equipped with a flat-screen TV offering premium cable and streaming services.',
         price: 4000.00
       },
       {
@@ -83,7 +83,7 @@ module.exports = {
         lat: 10.96235,
         lng: 30.26534,
         name: 'Resort-Style Terrace Overlooking LA ',
-        description: 'Experience the epitome of modern luxury with this stunning 4-bedroom, 4.5-bathroom residence located in the prestigious Platinum Triangle. Boasting a home cinema, wine cellar, and breathtaking panoramic views of Los Angeles, this home offers the ultimate in sophistication. Step outside onto the magnificent resort style terrace, where youll find designer deck furniture, a stylish pergola lounge area, and an inviting infinity pool adorned with two floating daybeds. Towering palms emerge from amidst plush turquoise cushions, creating a serene oasis perfect for families and small groups alike. Do not miss the opportunity to indulge in a truly luxurious and deeply relaxing city getaway. Book your stay today and prepare to immerse yourself in unparalleled comfort and elegance.',
+        description: 'Experience the epitome of modern luxury with this stunning 4-bedroom, 4.5-bathroom residence located in the prestigious Platinum Triangle. Boasting a home cinema, wine cellar, and breathtaking panoramic views of Los Angeles, this home offers the ultimate in sophistication. Step outside onto the magnificent resort style terrace, where youll find designer deck furniture, a stylish pergola lounge area, and an inviting infinity pool adorned with two floating daybeds.',
         price: 2500.00
       }
     ], options)
