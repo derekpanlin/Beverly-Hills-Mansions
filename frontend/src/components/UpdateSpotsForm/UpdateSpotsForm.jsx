@@ -79,13 +79,13 @@ function UpdateSpotsForm() {
             newErrors.image1 = 'Image URL must end in .png, .jpg, or .jpeg';
         }
         if (image2 && !regex.test(image2)) {
-            newErrors.image1 = 'Image URL must end in .png, .jpg, or .jpeg';
+            newErrors.image2 = 'Image URL must end in .png, .jpg, or .jpeg';
         }
         if (image3 && !regex.test(image3)) {
-            newErrors.image1 = 'Image URL must end in .png, .jpg, or .jpeg';
+            newErrors.image3 = 'Image URL must end in .png, .jpg, or .jpeg';
         }
         if (image4 && !regex.test(image4)) {
-            newErrors.image1 = 'Image URL must end in .png, .jpg, or .jpeg';
+            newErrors.image4 = 'Image URL must end in .png, .jpg, or .jpeg';
         }
 
 
@@ -134,7 +134,7 @@ function UpdateSpotsForm() {
     return (
         <div className="form-container">
             <form onSubmit={handleSubmit} className="create-spot-form">
-                <h2>Create a New Spot</h2>
+                <h2>Update your Spot</h2>
                 <h3>Wheres your place located?</h3>
                 <p>Guests will only get your exact location once they booked a reservation.</p>
                 <label>

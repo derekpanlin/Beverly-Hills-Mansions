@@ -129,14 +129,20 @@ export const updateSpots = (spotId, payload) => async (dispatch) => {
 }
 
 export const deleteSpot = (spotId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/spots/${spotId}`, {
-        method: "DELETE",
-    });
+    try {
 
-    if (res.ok) {
-        dispatch(deleteSpotAction(spotId))
-    } else {
-        console.error("Failed to delete spot");
+        const res = await csrfFetch(`/api/spots/${spotId}`, {
+            method: "DELETE",
+        });
+
+        if (res.ok) {
+            dispatch(deleteSpotAction(spotId))
+        } else {
+            console.error("Failed to delete spot");
+        }
+    } catch (error) {
+        console.error(error);
+        throw error;
     }
 
 }

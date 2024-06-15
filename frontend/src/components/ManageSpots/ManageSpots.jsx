@@ -21,7 +21,11 @@ function ManageSpots() {
 
     useEffect(() => {
         dispatch(getSpots())
-    }, [dispatch, spots])
+    }, [dispatch])
+
+    const handleDeleteCallback = () => {
+        dispatch(getSpots())
+    }
 
     return (
         <div className="spots-container">
@@ -56,7 +60,7 @@ function ManageSpots() {
                             <NavLink to={`/spots/${spot.id}/edit`} className="button-link">Update</NavLink>
                             <OpenModalButton
                                 buttonText="Delete"
-                                modalComponent={<ConfirmDeleteModal spotId={spot.id} />}
+                                modalComponent={<ConfirmDeleteModal spotId={spot.id} onDelete={handleDeleteCallback} />}
                                 className="delete-button"
                             />
                         </div>

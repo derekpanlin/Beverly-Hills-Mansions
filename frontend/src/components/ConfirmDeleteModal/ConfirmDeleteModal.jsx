@@ -3,13 +3,21 @@ import { useModal } from '../../context/Modal';
 import { useDispatch } from 'react-redux';
 import { deleteSpot } from '../../store/spots';
 
-function ConfirmDeleteModal({ spotId }) {
+function ConfirmDeleteModal({ spotId, onDelete }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
 
     const handleDelete = async () => {
-        await dispatch(deleteSpot(spotId));
-        closeModal();
+        try {
+            await dispatch(deleteSpot(spotId));
+            if (onDelete) {
+                onDelete();
+            }
+            closeModal();
+        } catch (error) {
+            console.error('Failed to delete spot', error);
+
+        }
     };
 
     return (
