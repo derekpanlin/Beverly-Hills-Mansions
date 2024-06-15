@@ -24,6 +24,11 @@ function LoginFormModal() {
             });
     };
 
+    const handleDemoLogin = (credential, password) => {
+        dispatch(sessionActions.login({ credential, password }))
+        closeModal();
+    }
+
 
 
     useEffect(() => {
@@ -65,9 +70,9 @@ function LoginFormModal() {
                             required
                         />
                     </label>
-                    {/* {errors.password && <p className="error">{errors.password}</p>} */}
                     <button disabled={Object.values(errors).length > 0} type="submit">Log In</button>
                 </form>
+                <button className='demo-user-button' onClick={() => handleDemoLogin("demouser", "password4")}>Demo User</button>
             </div>
         </div>
     );

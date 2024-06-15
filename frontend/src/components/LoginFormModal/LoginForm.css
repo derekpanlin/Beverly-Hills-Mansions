@@ -66,6 +66,7 @@ button:disabled {
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 .login-form button:disabled {
@@ -90,4 +91,8 @@ button:disabled {
 h1 {
     text-align: center;
     margin-bottom: 20px;
+}
+
+demo-user-button {
+    margin-top: 10px
 }
