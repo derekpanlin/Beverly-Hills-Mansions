@@ -20,7 +20,7 @@ function ProfileButton({ user }) {
         e.stopPropagation();
         setShowMenu(!showMenu);
     }
-    // testing
+
     useEffect(() => {
         if (!showMenu) return;
 
