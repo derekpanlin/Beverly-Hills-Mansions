@@ -94,10 +94,10 @@ module.exports = {
         country: 'USA',
         lat: 105.96235,
         lng: 304.26534,
-        name: 'Resort-Style Terrace Overlooking LA ',
-        description: 'Experience the epitome of modern luxury with this stunning 4-bedroom, 4.5-bathroom residence located in the prestigious Platinum Triangle. Boasting a home cinema, wine cellar, and breathtaking panoramic views of Los Angeles, this home offers the ultimate in sophistication. Step outside onto the magnificent resort style terrace, where youll find designer deck furniture, a stylish pergola lounge area, and an inviting infinity pool adorned with two floating daybeds.',
-        price: 2500.00
-      }
+        name: '50 Acre Isolated Retreat Mansion ',
+        description: 'Luxurious private estate set on 33 acres along Barton Creek in Beverly Hills, CA. Just 18 miles from downtown Los Angeles and 9 miles from the historic charm of Hollywood. Surrounded by renowned vineyards, craft breweries, artisan distilleries, and elegant wedding venues. Enjoy bespoke in-home experiences including private chefs, mixologists, yoga sessions, floral arrangements, massages, pedicures, tarot readings, babysitting services, chauffeured transportation, and serene sound bowl meditations.',
+        price: 5500.00
+      },
     ], options)
   },
 

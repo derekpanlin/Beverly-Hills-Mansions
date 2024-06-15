@@ -164,7 +164,32 @@ module.exports = {
         url: 'https://a0.muscache.com/im/pictures/miso/Hosting-17223162/original/9cb1dd7d-e025-49cd-a9d4-7bbd03f48835.jpeg',
         preview: false,
         spotId: 6
-      }
+      },
+      {
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-21696485/original/d58cf3a4-0f02-46c9-834c-dd258dad5e8c.jpeg',
+        preview: true,
+        spotId: 7
+      },
+      {
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-21696485/original/c1fb2c0a-2d0e-4788-9875-da8eb28297cc.jpeg',
+        preview: false,
+        spotId: 7
+      },
+      {
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-21696485/original/03b7c505-41e8-406e-a510-7120735c757e.jpeg',
+        preview: false,
+        spotId: 7
+      },
+      {
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-21696485/original/fc4c5fee-5cb2-4bc4-bd1f-993d924c82fd.jpeg',
+        preview: false,
+        spotId: 7
+      },
+      {
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-21696485/original/b477c207-4d2b-4fdc-8c42-a5a4137b1d6e.jpeg',
+        preview: false,
+        spotId: 7
+      },
     ], options)
   },
 
