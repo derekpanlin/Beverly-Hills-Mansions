@@ -120,9 +120,6 @@ function UpdateSpotsForm() {
                     await dispatch(createSpotImages(spotId, image.url, image.preview));
                 }
 
-                // Added to update and fetch spot detials to reflect change
-                dispatch(getSpotDetails(spotId));
-
                 navigate(`/spots/${spotId}`);
             } else {
                 console.error("Failed to create spot");

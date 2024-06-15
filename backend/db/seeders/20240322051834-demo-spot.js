@@ -85,6 +85,18 @@ module.exports = {
         name: 'Resort-Style Terrace Overlooking LA ',
         description: 'Experience the epitome of modern luxury with this stunning 4-bedroom, 4.5-bathroom residence located in the prestigious Platinum Triangle. Boasting a home cinema, wine cellar, and breathtaking panoramic views of Los Angeles, this home offers the ultimate in sophistication. Step outside onto the magnificent resort style terrace, where youll find designer deck furniture, a stylish pergola lounge area, and an inviting infinity pool adorned with two floating daybeds.',
         price: 2500.00
+      },
+      {
+        ownerId: 4,
+        address: '1234 Demo User Lane',
+        city: 'Beverly Hills',
+        state: 'CA',
+        country: 'USA',
+        lat: 105.96235,
+        lng: 304.26534,
+        name: 'Resort-Style Terrace Overlooking LA ',
+        description: 'Experience the epitome of modern luxury with this stunning 4-bedroom, 4.5-bathroom residence located in the prestigious Platinum Triangle. Boasting a home cinema, wine cellar, and breathtaking panoramic views of Los Angeles, this home offers the ultimate in sophistication. Step outside onto the magnificent resort style terrace, where youll find designer deck furniture, a stylish pergola lounge area, and an inviting infinity pool adorned with two floating daybeds.',
+        price: 2500.00
       }
     ], options)
   },
