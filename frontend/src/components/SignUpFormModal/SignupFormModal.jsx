@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import * as sessionActions from '../../store/session';
-import './SignupForm.css';
+import './SignupFormModal.css';
 
 
 function SignupFormModal() {
@@ -16,6 +16,29 @@ function SignupFormModal() {
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
+    useEffect(() => {
+        const newErrors = {};
+        if (email.length === 0) {
+            newErrors.email1 = "Email is required";
+        }
+        if (username.length < 4) {
+            newErrors.username1 = "Username must be at least 4 characters long";
+        }
+        if (firstName.length === 0) {
+            newErrors.firstName1 = "First Name is required";
+        }
+        if (lastName.length === 0) {
+            newErrors.lastName1 = "Last Name is required";
+        }
+        if (password.length < 6) {
+            newErrors.password1 = "Password must be at least 6 characters long";
+        }
+        if (password !== confirmPassword) {
+            newErrors.confirmPassword1 = "Confirm Password field must be the same as the Password field";
+        }
+
+        setErrors(newErrors);
+    }, [email, username, firstName, lastName, password, confirmPassword]);
 
     // Handle Submit
     const handleSubmit = (e) => {
@@ -44,6 +67,11 @@ function SignupFormModal() {
         });
     };
 
+
+    const disableSubmit = () => {
+        return Object.keys(errors).some(error => error);
+    }
+
     return (
         <div className="signup-container">
             <div className='signup-roof'></div>
@@ -56,7 +84,6 @@ function SignupFormModal() {
                             type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            required
                         />
                     </label>
                     {errors.email && <p>{errors.email}</p>}
@@ -66,7 +93,6 @@ function SignupFormModal() {
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            required
                         />
                     </label>
                     {errors.username && <p>{errors.username}</p>}
@@ -76,7 +102,6 @@ function SignupFormModal() {
                             type="text"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
-                            required
                         />
                     </label>
                     {errors.firstName && <p>{errors.firstName}</p>}
@@ -86,7 +111,6 @@ function SignupFormModal() {
                             type="text"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
-                            required
                         />
                     </label>
                     {errors.lastName && <p>{errors.lastName}</p>}
@@ -96,7 +120,6 @@ function SignupFormModal() {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            required
                         />
                     </label>
                     {errors.password && <p>{errors.password}</p>}
@@ -106,11 +129,10 @@ function SignupFormModal() {
                             type="password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
                         />
                     </label>
                     {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-                    <button type="submit">Sign Up</button>
+                    <button className="submit-button" disabled={disableSubmit()} type="submit">Sign Up</button>
                 </form>
             </div>
         </div>

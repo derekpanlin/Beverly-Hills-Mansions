@@ -79,3 +79,8 @@ body {
     width: 100%;
     text-align: center;
 }
+
+.submit-button:disabled {
+    cursor: not-allowed;
+    background-color: grey;
+}
