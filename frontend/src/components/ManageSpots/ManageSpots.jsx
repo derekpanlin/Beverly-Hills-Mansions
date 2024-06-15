@@ -46,7 +46,7 @@ function ManageSpots() {
                                 <div className='tooltip'>{spot.name}</div>
                                 <div className='spot-location-rating'>
                                     <div className='spot-location'>{spot.city}, {spot.state}</div>
-                                    <div className='spot-rating'>★ {spot.avgRating || "New"} </div>
+                                    <div className='spot-rating'>★ {spot.avgRating > 0 ? spot.avgRating : "New"} </div>
                                 </div>
                                 <div className="spot-price">${spot.price} / night</div>
                             </div>
