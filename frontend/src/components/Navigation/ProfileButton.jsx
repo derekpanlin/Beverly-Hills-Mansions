@@ -54,8 +54,8 @@ function ProfileButton({ user }) {
     return (
         <div className="profile-button-container">
             <button id="avatar-button" onClick={toggleMenu}>
-                <GiHamburgerMenu className="hamburger-icon" size={40} />
-                <FaRegCircleUser className="avatar-icon" size={40} />
+                <GiHamburgerMenu className="hamburger-icon" size={25} />
+                <FaRegCircleUser className="avatar-icon" size={25} />
             </button>
             <ul className={profileDropdownClass} ref={ulRef}>
                 {user ? (

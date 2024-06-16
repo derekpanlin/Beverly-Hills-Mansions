@@ -41,7 +41,7 @@ function SpotDetails() {
                 {mainImage && <img className='main-image' src={mainImage.url} />}
                 <div className='small-images'>
                     {otherImages.slice(0, 4).map(image => (
-                        <img key={image.id} src={image.url} />
+                        <img id='individual-grid-image' key={image.id} src={image.url} />
                     ))}
                 </div>
             </div>
