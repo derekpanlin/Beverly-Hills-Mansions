@@ -34,6 +34,12 @@
     grid-template-rows: 1fr 1fr;
     gap: 10px;
     max-height: 420px;
+
+}
+
+#individual-grid-image {
+    max-height: 205px;
+    object-fit: cover;
 }
 
 .small-images img {
@@ -56,7 +62,7 @@
 .spot-hosted {
     flex: 2;
     padding-right: 20px;
-
+    max-width: 620px;
 }
 
 .reserve-box {

@@ -67,7 +67,12 @@ body {
     box-sizing: border-box;
 }
 
-.signup-form button:hover {
+.submit-button:disabled {
+    cursor: not-allowed;
+    background-color: grey;
+}
+
+.signup-form button:not(:disabled):hover {
     background-color: #0056b3;
 }
 
@@ -78,9 +83,4 @@ body {
     margin-bottom: 20px;
     width: 100%;
     text-align: center;
-}
-
-.submit-button:disabled {
-    cursor: not-allowed;
-    background-color: grey;
 }
