@@ -34,24 +34,24 @@ function UpdateSpotsForm() {
 
     useEffect(() => {
         if (spots) {
-            setCountry(spots.country);
-            setAddress(spots.address);
-            setCity(spots.city);
-            setState(spots.state);
-            setDescription(spots.description);
-            setName(spots.name);
-            setPrice(spots.price);
+            setCountry(spots.country || '');
+            setAddress(spots.address || '');
+            setCity(spots.city || '');
+            setState(spots.state || '');
+            setDescription(spots.description || '');
+            setName(spots.name || '');
+            setPrice(spots.price || '');
         }
 
-        if (spots.SpotImages) {
+        if (spots && spots.SpotImages) {
             const previewImage = spots.SpotImages.find(img => img.preview === true);
-            const urlImage = spots.SpotImages.filter(img => img.preview === false);
+            const urlImages = spots.SpotImages.filter(img => img.preview === false);
 
             setPreviewImage(previewImage ? previewImage.url : "");
-            setImage1(urlImage[0].url ? urlImage[0].url : "");
-            setImage2(urlImage[1].url ? urlImage[1].url : "");
-            setImage3(urlImage[2].url ? urlImage[2].url : "");
-            setImage4(urlImage[3].url ? urlImage[3].url : "");
+            setImage1(urlImages[0] && urlImages[0].url ? urlImages[0].url : "");
+            setImage2(urlImages[1] && urlImages[1].url ? urlImages[1].url : "");
+            setImage3(urlImages[2] && urlImages[2].url ? urlImages[2].url : "");
+            setImage4(urlImages[3] && urlImages[3].url ? urlImages[3].url : "");
         } else {
             setPreviewImage('');
             setImage1('');
@@ -59,7 +59,7 @@ function UpdateSpotsForm() {
             setImage3('');
             setImage4('');
         }
-    }, [spots])
+    }, [spots]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

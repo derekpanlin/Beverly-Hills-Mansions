@@ -6,6 +6,10 @@
     /* Adjust as needed */
 }
 
+.spot-image img {
+    object-fit: cover;
+}
+
 .button-link {
     font-size: 15px;
     display: inline-block;
