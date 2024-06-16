@@ -71,11 +71,11 @@ function CreateSpotsForm() {
             }
 
 
-            const createSpot = await dispatch(createNewSpot(newSpot));
-            const spotId = createSpot.id;
+            let createSpot = await dispatch(createNewSpot(newSpot));
 
 
-            if (createSpot && spotId) {
+            if (createSpot && createSpot.id) {
+                const spotId = createSpot.id;
                 const images = [
                     ...(previewImage ? [{ url: previewImage, preview: true }] : []),
                     ...(image1 ? [{ url: image1, preview: false }] : []),
@@ -149,7 +149,7 @@ function CreateSpotsForm() {
                 <label>
                     <h3>Describe your place to guests</h3>
                     <p>Mention the best features of your space, any special amentities like
-                        fast wif or parking, and what you love about the neighborhood.</p>
+                        fast wifi or parking, and what you love about the neighborhood.</p>
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
@@ -159,7 +159,7 @@ function CreateSpotsForm() {
                     {errors.description && <p className="error-message">{errors.description}</p>}
                 </label>
                 <label>
-                    Create a title for your spot
+                    Create a title for your spot.
                     <input
                         type="text"
                         value={name}

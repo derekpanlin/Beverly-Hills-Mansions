@@ -162,20 +162,27 @@ const spotsReducer = (state = initialState, action) => {
             };
         }
         case GET_SPOT_DETAILS: {
-            return {
-                ...state,
-                currentSpot: { ...action.spotDetail }
-            };
+            const newState = { ...state };
+            newState.currentSpot = action.spotDetail;
+            newState.allSpots[action.spotDetail.id] = action.spotDetail;
+            return newState;
+            // return {
+            //     ...state,
+            //     currentSpot: { ...action.spotDetail }
+            // };
         }
         case CREATE_SPOT: {
-            const newState = {
-                ...state,
-                allSpots: {
-                    ...state.allSpots,
-                    [action.newSpot.id]: action.newSpot
-                }
-            };
+            const newState = { ...state, allSpots: { ...state.allSpots } };
+            newState.allSpots[action.newSpot.id] = action.newSpot;
             return newState;
+            // const newState = {
+            //     ...state,
+            //     allSpots: {
+            //         ...state.allSpots,
+            //         [action.newSpot.id]: action.newSpot
+            //     }
+            // };
+            // return newState;
         }
         case CREATE_SPOT_IMAGE: {
             const newState = { ...state };

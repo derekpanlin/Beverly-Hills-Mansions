@@ -19,22 +19,22 @@ function SignupFormModal() {
     useEffect(() => {
         const newErrors = {};
         if (email.length === 0) {
-            newErrors.email = "Email is required";
+            newErrors.email1 = "Email is required";
         }
         if (username.length < 4) {
-            newErrors.username = "Username must be at least 4 characters long";
+            newErrors.username1 = "Username must be at least 4 characters long";
         }
         if (firstName.length === 0) {
-            newErrors.firstName = "First Name is required";
+            newErrors.firstName1 = "First Name is required";
         }
         if (lastName.length === 0) {
-            newErrors.lastName = "Last Name is required";
+            newErrors.lastName1 = "Last Name is required";
         }
         if (password.length < 6) {
-            newErrors.password = "Password must be at least 6 characters long";
+            newErrors.password1 = "Password must be at least 6 characters long";
         }
         if (password !== confirmPassword) {
-            newErrors.confirmPassword = "Confirm Password field must be the same as the Password field";
+            newErrors.confirmPassword1 = "Confirm Password field must be the same as the Password field";
         }
 
         setErrors(newErrors);
