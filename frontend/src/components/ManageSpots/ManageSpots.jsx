@@ -14,6 +14,7 @@ function ManageSpots() {
     const dispatch = useDispatch();
 
 
+
     const handleClick = (spotId) => {
         navigate(`/spots/${spotId}`)
     };
@@ -32,7 +33,7 @@ function ManageSpots() {
             <div className="manage-spots-header">
                 <h2>Manage Your Spots</h2>
                 <div>
-                    {sessionUser && (
+                    {sessionUser && spots.length === 0 && (
                         <div>
                             <NavLink to="/spots/new" className="create-spot-link">Create a New Spot</NavLink>
                         </div>

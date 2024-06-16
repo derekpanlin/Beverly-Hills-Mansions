@@ -9,6 +9,7 @@ import './UpdateSpotsForm.css'
 function UpdateSpotsForm() {
     const { spotId } = useParams();
     const spots = useSelector(state => state.spots.currentSpot)
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [country, setCountry] = useState('');
@@ -25,7 +26,7 @@ function UpdateSpotsForm() {
     const [image4, setImage4] = useState('');
     const [errors, setErrors] = useState({});
 
-    // console.log(spots);
+
 
     useEffect(() => {
         dispatch(getSpotDetails(spotId))
@@ -33,26 +34,32 @@ function UpdateSpotsForm() {
 
     useEffect(() => {
         if (spots) {
-            setCountry(spots.country);
-            setAddress(spots.address);
-            setCity(spots.city);
-            setState(spots.state);
-            setDescription(spots.description);
-            setName(spots.name);
-            setPrice(spots.price);
+            setCountry(spots.country || '');
+            setAddress(spots.address || '');
+            setCity(spots.city || '');
+            setState(spots.state || '');
+            setDescription(spots.description || '');
+            setName(spots.name || '');
+            setPrice(spots.price || '');
         }
 
-        if (spots.SpotImages) {
+        if (spots && spots.SpotImages) {
             const previewImage = spots.SpotImages.find(img => img.preview === true);
-            const urlImage = spots.SpotImages.filter(img => img.preview === false);
+            const urlImages = spots.SpotImages.filter(img => img.preview === false);
 
-            setPreviewImage(previewImage.url);
-            setImage1(urlImage[0].url);
-            setImage2(urlImage[1].url);
-            setImage3(urlImage[2].url);
-            setImage4(urlImage[3].url);
+            setPreviewImage(previewImage ? previewImage.url : "");
+            setImage1(urlImages[0] && urlImages[0].url ? urlImages[0].url : "");
+            setImage2(urlImages[1] && urlImages[1].url ? urlImages[1].url : "");
+            setImage3(urlImages[2] && urlImages[2].url ? urlImages[2].url : "");
+            setImage4(urlImages[3] && urlImages[3].url ? urlImages[3].url : "");
+        } else {
+            setPreviewImage('');
+            setImage1('');
+            setImage2('');
+            setImage3('');
+            setImage4('');
         }
-    }, [spots])
+    }, [spots]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -181,7 +188,7 @@ function UpdateSpotsForm() {
                 <label>
                     <h3>Describe your place to guests</h3>
                     <p>Mention the best features of your space, any special amentities like
-                        fast wif or parking, and what you love about the neighborhood.</p>
+                        fast wifi or parking, and what you love about the neighborhood.</p>
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
@@ -191,7 +198,7 @@ function UpdateSpotsForm() {
                     {errors.description && <p className="error-message">{errors.description}</p>}
                 </label>
                 <label>
-                    Create a title for your spot
+                    Create a title for your spot.
                     <input
                         type="text"
                         value={name}
@@ -262,7 +269,7 @@ function UpdateSpotsForm() {
                     {errors.image4 && <p className="error-message">{errors.image4}</p>}
                 </label>
 
-                <button type="submit">Create Spot</button>
+                <button type="submit">Update Spot</button>
             </form>
         </div>
     );
