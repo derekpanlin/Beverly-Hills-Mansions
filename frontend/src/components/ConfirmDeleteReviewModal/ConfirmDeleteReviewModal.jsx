@@ -9,8 +9,8 @@ function ConfirmDeleteReviewModal({ reviewId, spotId }) {
 
     const handleDelete = async (reviewId) => {
         await dispatch(deleteReview(reviewId));
-        await dispatch(getReviews(spotId))
         closeModal();
+        await dispatch(getReviews(spotId))
     };
 
 
