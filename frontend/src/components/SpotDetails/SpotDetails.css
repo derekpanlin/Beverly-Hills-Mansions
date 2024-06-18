@@ -95,3 +95,39 @@
 .reserve-button:hover {
     background-color: #ff7878;
 }
+
+@media (max-width: 600px) {
+    .spot-details-container {
+        padding-bottom: 80px;
+    }
+
+    .reserve-box {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        align-items: center;
+        margin: 0;
+        justify-content: space-between;
+        z-index: 1;
+        padding: 10px 20px;
+    }
+
+    .reserve-button {
+        max-width: 180px;
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .price-and-rating {
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        width: 500px;
+    }
+}
